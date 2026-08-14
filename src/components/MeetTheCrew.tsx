@@ -13,6 +13,7 @@ import Purva from "@/assets/Purva.png";
 import Nischay from "@/assets/Nischay.png";
 import Ranvir from "@/assets/Ranvir.png";
 import Shlok from "@/assets/Shlok.jpeg";
+import Jushiya from "@/assets/Jushiya.jpeg";
 
 /**
  * To finish a member: drop their photo in src/assets, import it and set `image`,
@@ -42,6 +43,13 @@ const leadership: CrewMember[] = [
     image: Arnav,
     github: "https://github.com/12asascoder",
     linkedin: "https://www.linkedin.com/in/arnav-puggal/",
+  },
+  {
+    name: "Jushiya Grover",
+    role: "President & Campus Ambassador",
+    image: Jushiya,
+    github: TBD,
+    linkedin: TBD,
   },
 ];
 
@@ -290,6 +298,7 @@ function CrewCard({ member, width }: { member: CrewMember; width: string }) {
           <p
             className="mt-0.5 truncate"
             style={{ fontSize: "clamp(8px, 2vw, 11px)", color: "rgba(255,255,255,0.4)" }}
+            title={member.role}
           >
             {member.role}
           </p>
