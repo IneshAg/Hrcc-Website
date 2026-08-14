@@ -16,6 +16,7 @@ import Shlok from "@/assets/Shlok.jpeg";
 import Jushiya from "@/assets/Jushiya.jpeg";
 import Avinash from "@/assets/Avinash.jpeg";
 import ShanayaImage from "@/assets/Shanaya.jpeg";
+import Nikhil from "@/assets/Nikhil.jpeg";
 
 /**
  * To finish a member: drop their photo in src/assets, import it and set `image`,
@@ -26,6 +27,7 @@ interface CrewMember {
   name: string;
   role: string;
   image?: StaticImageData;
+  imagePosition?: string;
   github: string;
   linkedin: string;
 }
@@ -122,7 +124,14 @@ const domainHeads: DomainGroup[] = [
         github: TBD,
         linkedin: "https://www.linkedin.com/in/sai-shraavya-badrinath-48aa48323",
       },
-      { name: "Nikhil", role: "Creative Head", github: TBD, linkedin: TBD },
+      {
+        name: "Nikhil",
+        role: "Creative Head",
+        image: Nikhil,
+        imagePosition: "center top",
+        github: TBD,
+        linkedin: TBD,
+      },
     ],
   },
   {
@@ -280,6 +289,7 @@ function CrewCard({ member, width }: { member: CrewMember; width: string }) {
             alt={member.name}
             fill
             className="object-cover"
+            style={{ objectPosition: member.imagePosition || "center" }}
             sizes="(max-width: 640px) 160px, 240px"
           />
         ) : (
