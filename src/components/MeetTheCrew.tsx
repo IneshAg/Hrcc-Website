@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
 import Image, { StaticImageData } from "next/image";
 import Arnav from "@/assets/Arnav.png";
@@ -30,6 +31,7 @@ interface CrewMember {
   imagePosition?: string;
   github: string;
   linkedin: string;
+  isSecret?: boolean;
 }
 
 const TBD = "#";
@@ -43,7 +45,7 @@ interface DomainGroup {
 const founder: CrewMember[] = [
   {
     name: "Arnav Puggal",
-    role: "Founder",
+    role: "Founder & Ex-Chairperson",
     image: Arnav,
     github: "https://github.com/12asascoder",
     linkedin: "https://www.linkedin.com/in/arnav-puggal/",
@@ -55,6 +57,7 @@ const president: CrewMember[] = [
     name: "Jushiya Grover",
     role: "President & Campus Ambassador",
     image: Jushiya,
+    isSecret: true,
     github: TBD,
     linkedin: TBD,
   },
@@ -91,6 +94,7 @@ const secretaries: CrewMember[] = [
     name: "Purva Jain",
     role: "Joint Secretary",
     image: Purva,
+    imagePosition: "center top",
     github: "https://github.com/purvajain-git",
     linkedin: "https://www.linkedin.com/in/purva-jain17",
   },
@@ -110,8 +114,8 @@ const domainHeads: DomainGroup[] = [
       { name: "Shlok Agarwal", 
         role: "Technical Head", 
         image: Shlok,
-        github: TBD, 
-        linkedin: TBD },
+        github: "https://github.com/Shlok-2006", 
+        linkedin: "https://www.linkedin.com/in/shlok0606/" },
     ],
   },
   {
@@ -170,8 +174,8 @@ const domainLeads: DomainGroup[] = [
         name: "Shanaya",
         role: "Technical Lead",
         image: ShanayaImage,
-        github: TBD,
-        linkedin: TBD,
+        github: "https://github.com/shanayaray",
+        linkedin: "https://www.linkedin.com/in/shanaya-ray-5843443a6?utm_source=share_via&utm_content=profile&utm_medium=member_ios",
       },
     ],
   },
@@ -258,9 +262,21 @@ function SocialLink({
 
 // ─── Card ──────────────────────────────────────────────────────────────────────
 function CrewCard({ member, width }: { member: CrewMember; width: string }) {
+  const [clicks, setClicks] = useState(0);
+  const isRevealed = !member.isSecret || clicks >= 3;
+
+  const handleCardClick = () => {
+    if (member.isSecret && clicks < 3) {
+      setClicks((prev) => prev + 1);
+    }
+  };
+
   return (
     <motion.div
-      className="relative flex flex-col shrink-0 rounded-[10px] overflow-hidden"
+      onClick={handleCardClick}
+      className={`relative flex flex-col shrink-0 rounded-[10px] overflow-hidden ${
+        member.isSecret && !isRevealed ? "cursor-pointer select-none" : ""
+      }`}
       style={{
         width,
         background: "#111111",
@@ -272,6 +288,7 @@ function CrewCard({ member, width }: { member: CrewMember; width: string }) {
         borderColor: "#05C770",
         transition: { duration: 0.18 },
       }}
+      whileTap={member.isSecret && !isRevealed ? { scale: 0.98 } : {}}
     >
       <div
         className="flex items-center gap-1 px-2 py-2"
@@ -283,7 +300,55 @@ function CrewCard({ member, width }: { member: CrewMember; width: string }) {
       </div>
 
       <div className="relative w-full" style={{ aspectRatio: "1 / 1" }}>
-        {member.image ? (
+        {member.isSecret && !isRevealed ? (
+          <div
+            className="absolute inset-0 flex flex-col items-center justify-center p-4 text-center transition-all duration-300 select-none"
+            style={{
+              background:
+                "radial-gradient(100% 100% at 50% 20%, rgba(5,199,112,0.12), transparent 75%), #0c0c0c",
+            }}
+          >
+            <motion.div
+              key={clicks}
+              initial={{ scale: 0.92, opacity: 0.85 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 0.15 }}
+              className="flex flex-col items-center gap-2"
+            >
+              {/* Sleek Minimalist Keyhole SVG */}
+              <div className="w-9 h-9 rounded-full bg-[#05C770]/10 border border-[#05C770]/25 flex items-center justify-center text-[#05C770]">
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                </svg>
+              </div>
+
+              <div className="flex flex-col items-center gap-0.5">
+                <span
+                  className="font-bold tracking-[0.18em] uppercase text-[#05C770]"
+                  style={{ fontSize: "clamp(10px, 2.2vw, 12px)" }}
+                >
+                  Revealing Soon
+                </span>
+                <span className="text-[11px] text-white/50 font-normal">
+                  {clicks === 0
+                    ? "Tap 3 times to reveal"
+                    : `${3 - clicks} tap${3 - clicks > 1 ? "s" : ""} remaining`}
+                </span>
+              </div>
+
+              <div className="flex gap-1.5 mt-1 items-center">
+                {[1, 2, 3].map((step) => (
+                  <div
+                    key={step}
+                    className={`h-1 rounded-full transition-all duration-300 ${
+                      step <= clicks ? "w-3.5 bg-[#05C770]" : "w-1.5 bg-white/15"
+                    }`}
+                  />
+                ))}
+              </div>
+            </motion.div>
+          </div>
+        ) : member.image ? (
           <Image
             src={member.image}
             alt={member.name}
