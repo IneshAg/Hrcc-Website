@@ -36,7 +36,7 @@ interface DomainGroup {
 }
 
 // ─── Data ──────────────────────────────────────────────────────────────────────
-const leadership: CrewMember[] = [
+const founder: CrewMember[] = [
   {
     name: "Arnav Puggal",
     role: "Founder",
@@ -44,6 +44,9 @@ const leadership: CrewMember[] = [
     github: "https://github.com/12asascoder",
     linkedin: "https://www.linkedin.com/in/arnav-puggal/",
   },
+];
+
+const president: CrewMember[] = [
   {
     name: "Jushiya Grover",
     role: "President & Campus Ambassador",
@@ -402,7 +405,8 @@ export default function MeetTheCrew() {
           </h2>
         </motion.div>
 
-        <CrewRow title="Founder & President" members={leadership} />
+        <CrewRow title="Founder" members={founder} />
+        <CrewRow title="President & Campus Ambassador" members={president} />
         <CrewRow title="Vice Presidents" members={vicePresidents} />
         <CrewRow title="Secretary & Joint Secretary" members={secretaries} />
         <DomainRow title="Domain Heads" groups={domainHeads} />
