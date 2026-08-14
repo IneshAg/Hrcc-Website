@@ -1,41 +1,55 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useRef } from "react";
-import Image, { StaticImageData } from "next/image";
+import { useRef, type ReactNode } from "react";
+import { StaticImageData } from "next/image";
 
 import technicalBg from "@/assets/technical-bg.png";
 import creativeBg from "@/assets/creative-bg.png";
 import corporateBg from "@/assets/corporate-bg.png";
+import { RECRUITMENT_FORM_URL } from "@/lib/links";
+
+import DomainRevealCard from "./domains/DomainRevealCard";
+import TechnicalPanel from "./domains/TechnicalPanel";
+import CreativePanel from "./domains/CreativePanel";
+import CorporatePanel from "./domains/CorporatePanel";
 
 interface Domain {
   title: string;
+  kicker: string;
   description: string;
+  tags: string[];
   image: StaticImageData;
-  span: string;
+  renderPanel: (active: boolean) => ReactNode;
 }
 
 const domains: Domain[] = [
   {
     title: "TECHNICAL",
+    kicker: "Build & Ship",
     description:
       "Dedicated to advancing technical skills in coding, AI, and hardware through innovation and collaboration.",
+    tags: ["Web Dev", "AI / ML", "Hardware", "CP"],
     image: technicalBg,
-    span: "md:col-span-1 md:row-span-2",
+    renderPanel: (active) => <TechnicalPanel active={active} />,
   },
   {
     title: "CREATIVE",
+    kicker: "Design & Story",
     description:
       "Where imagination meets design, producing visuals, content, and media that inspire, engage, and connect audiences.",
+    tags: ["Graphics", "Video", "Content", "Social"],
     image: creativeBg,
-    span: "md:col-span-1 md:row-span-1",
+    renderPanel: (active) => <CreativePanel active={active} />,
   },
   {
     title: "CORPORATE",
+    kicker: "Partner & Operate",
     description:
       "Building partnerships, managing events, and ensuring smooth operations through leadership, strategy, and collaboration.",
+    tags: ["Sponsorship", "Events", "Outreach", "Ops"],
     image: corporateBg,
-    span: "md:col-span-1 md:row-span-1",
+    renderPanel: (active) => <CorporatePanel active={active} />,
   },
 ];
 
@@ -58,87 +72,19 @@ export default function DomainsSection() {
       style={{ background: "transparent" }}
     >
       <div className="max-w-350 w-full pointer-events-none" ref={ref}>
-        {/* Domain Cards — Bento Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:auto-rows-[280px]">
+        {/* Domain Cards — drag-to-reveal sliders */}
+        <div className="flex flex-col gap-3">
           {domains.map((domain, i) => (
-            <motion.div
+            <DomainRevealCard
               key={domain.title}
-              className={`relative rounded-xl overflow-hidden cursor-pointer group pointer-events-auto ${domain.title === "TECHNICAL" ? "md:col-span-1 md:row-span-2" : domain.span}`}
-              style={{ minHeight: domain.title === "TECHNICAL" ? "280px" : "280px" }}
-              custom={i}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.3 }}
-              variants={fadeUp}
-            >
-              {/* Background image */}
-              <Image
-                src={domain.image}
-                alt={domain.title}
-                fill
-                className="object-cover transition-transform duration-700 group-hover:scale-105"
-                sizes="(max-width: 768px) 100vw, 50vw"
-                priority={i === 0}
-              />
-
-              {/* Dark overlay — heavier on the left for text readability */}
-              <div className="absolute inset-0 bg-linear-to-r from-black/90 via-black/50 to-transparent" />
-              <div className="absolute inset-0 bg-linear-to-t from-black/70 via-transparent to-transparent" />
-
-              {/* Subtle dot pattern */}
-              <div
-                className="absolute inset-0 opacity-[0.07]"
-                style={{
-                  backgroundImage:
-                    "radial-gradient(circle, rgba(46,200,102,0.4) 1px, transparent 1px)",
-                  backgroundSize: "18px 18px",
-                }}
-              />
-
-              {/* Content — top-left aligned with bottom button */}
-              <div className="relative z-10 p-6 md:p-8 h-full flex flex-col justify-between">
-                <div>
-                  <h3
-                    className="text-white font-black tracking-tight mb-3"
-                    style={{
-                      fontSize: "clamp(1.4rem, 2.8vw, 2.2rem)",
-                      textShadow: "2px 3px 10px rgba(0,0,0,0.7)",
-                      lineHeight: 1,
-                    }}
-                  >
-                    {domain.title}
-                  </h3>
-                  <p
-                    className="text-white/80 leading-relaxed max-w-[320px]"
-                    style={{
-                      fontSize: "clamp(0.85rem, 1.2vw, 1rem)",
-                      textShadow: "1px 1px 4px rgba(0,0,0,0.5)",
-                    }}
-                  >
-                    {domain.description}
-                  </p>
-                </div>
-                <button className="mt-5 self-start flex items-center gap-2 px-5 py-2.5 rounded-full bg-black/50 backdrop-blur-sm border border-[#05C770]/60 text-[#05C770] text-sm font-semibold hover:bg-[#05C770] hover:text-black transition-all duration-300 group/btn">
-                  <svg
-                    className="w-3 h-3 transition-transform group-hover/btn:translate-x-0.5"
-                    viewBox="0 0 12 12"
-                    fill="none"
-                  >
-                    <path
-                      d="M2 6h8M7 3l3 3-3 3"
-                      stroke="currentColor"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                  APPLY NOW
-                </button>
-              </div>
-
-              {/* Hover glow effect */}
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-linear-to-t from-[#05C770]/10 to-transparent" />
-            </motion.div>
+              index={i}
+              title={domain.title}
+              kicker={domain.kicker}
+              description={domain.description}
+              tags={domain.tags}
+              image={domain.image}
+              renderPanel={domain.renderPanel}
+            />
           ))}
         </div>
 
@@ -152,63 +98,102 @@ export default function DomainsSection() {
           custom={3}
         >
           {/* Left — Recruitments CTA */}
-          <div className="bg-linear-to-br from-[#05C770] to-[#04a060] rounded-xl p-6 md:p-12 flex flex-col justify-between min-h-50 relative overflow-hidden group cursor-pointer pointer-events-auto">
-            {/* Animated background pattern */}
-            <div 
-              className="absolute inset-0 opacity-10"
+          <div
+            id="recruitments"
+            className="group relative flex min-h-64 flex-col justify-between overflow-hidden rounded-xl bg-[#05C770] p-6 md:p-10 pointer-events-auto"
+            style={{ boxShadow: "0 30px 70px -35px rgba(5,199,112,0.65)" }}
+          >
+            {/* Depth: soft highlight top-left, shade bottom-right */}
+            <div
+              className="absolute inset-0"
               style={{
-                backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.3) 1px, transparent 1px)",
-                backgroundSize: "20px 20px",
+                background:
+                  "radial-gradient(90% 80% at 8% 0%, rgba(255,255,255,0.32), transparent 60%), radial-gradient(80% 90% at 100% 100%, rgba(0,0,0,0.22), transparent 62%)",
               }}
             />
-            
-            {/* Glow effect on hover */}
-            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-linear-to-t from-white/10 to-transparent" />
-            
+            {/* Fine grid */}
+            <div
+              className="absolute inset-0 opacity-[0.13]"
+              style={{
+                backgroundImage:
+                  "linear-gradient(rgba(0,0,0,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.5) 1px, transparent 1px)",
+                backgroundSize: "34px 34px",
+              }}
+            />
+            {/* Sheen sweep on hover */}
+            <div className="pointer-events-none absolute inset-y-0 -left-1/2 w-1/3 skew-x-12 bg-white/25 blur-2xl transition-transform duration-[900ms] ease-out group-hover:translate-x-[420%]" />
+            {/* Decorative rings */}
+            <div className="absolute -bottom-16 -right-16 h-56 w-56 rounded-full border border-black/10" />
+            <div className="absolute -bottom-8 -right-8 h-40 w-40 rounded-full border border-black/10" />
+
             <div className="relative z-10">
-              <div className="inline-flex items-center gap-2 px-2 py-1 rounded-full bg-black/20 backdrop-blur-sm mb-2 md:mb-4">
-                <div className="w-1.5 h-1.5 bg-black rounded-full animate-pulse" />
-                <span className="text-black text-[10px] md:text-xs font-semibold uppercase tracking-wider">Now Hiring</span>
+              <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-black/85 px-3 py-1.5">
+                <span className="relative flex h-2 w-2">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#05C770] opacity-75" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-[#05C770]" />
+                </span>
+                <span className="text-[10px] font-bold uppercase tracking-[0.18em] text-white md:text-xs">
+                  Live · Now Hiring
+                </span>
               </div>
+
               <h3
-                className="text-black font-black tracking-tight leading-none"
-                style={{
-                  fontSize: "clamp(1.8rem, 4vw, 4rem)",
-                }}
+                className="font-black leading-[0.88] tracking-tight text-black"
+                style={{ fontSize: "clamp(1.9rem, 4vw, 3.8rem)" }}
               >
                 RECRUITMENTS
                 <br />
-                OPEN.
+                OPEN<span className="text-black/45">.</span>
               </h3>
-              <p className="text-black/80 mt-2 md:mt-3 text-xs md:text-sm max-w-xs hidden md:block">
-                Join our team and be part of something amazing
+
+              <p className="mt-3 max-w-sm text-xs font-medium text-black/70 md:text-sm">
+                Three domains, one crew. Pick where you want to build and send in your
+                application.
               </p>
-            </div>
-            <div className="self-end mt-4 md:mt-6 relative z-10">
-              <div className="flex items-center gap-2 md:gap-3">
-                <span className="text-black font-semibold text-xs md:text-sm hidden sm:block">Apply Now</span>
-                <div className="bg-black/20 rounded-full p-2 md:p-3 group-hover:bg-black/30 transition-colors duration-300">
-                  <svg
-                    className="w-4 h-4 md:w-6 md:h-6 text-black transition-transform group-hover:translate-x-1 group-hover:-translate-y-1"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
+
+              <div className="mt-4 flex flex-wrap gap-2">
+                {domains.map((domain) => (
+                  <span
+                    key={domain.title}
+                    className="rounded-full bg-black/15 px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-black/75"
                   >
-                    <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
-                  </svg>
-                </div>
+                    {domain.title}
+                  </span>
+                ))}
               </div>
             </div>
-            {/* Enhanced decorative elements */}
-            <div className="absolute -bottom-10 -right-10 w-40 h-40 rounded-full bg-black/5" />
-            <div className="absolute -top-5 -left-5 w-20 h-20 rounded-full bg-white/10" />
-            <div className="absolute top-1/2 -right-8 w-16 h-16 rounded-full bg-black/5" />
+
+            <a
+              href={RECRUITMENT_FORM_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group/apply relative z-10 mt-6 inline-flex w-fit items-center gap-2.5 rounded-full bg-black px-6 py-3 text-sm font-bold tracking-wide text-[#05C770] transition-transform duration-300 hover:scale-[1.04]"
+            >
+              APPLY NOW
+              <svg
+                className="h-4 w-4 transition-transform duration-300 group-hover/apply:translate-x-1"
+                viewBox="0 0 24 24"
+                fill="none"
+              >
+                <path
+                  d="M5 12h13M13 6l6 6-6 6"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </a>
           </div>
 
           {/* Right — Video embed */}
-          <div className="bg-black rounded-xl overflow-hidden relative min-h-50 border border-white/5 pointer-events-auto">
+          <div
+            className="relative min-h-64 overflow-hidden rounded-xl border border-[#05C770]/20 bg-black pointer-events-auto"
+            style={{ boxShadow: "0 30px 70px -40px rgba(0,0,0,0.9)" }}
+          >
             <iframe
               src="https://player.vimeo.com/video/1115531421?badge=0&autopause=0&player_id=0&app_id=58479"
-              className="absolute inset-0 w-full h-full"
+              className="absolute inset-0 h-full w-full"
               frameBorder="0"
               allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
               allowFullScreen

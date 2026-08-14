@@ -32,7 +32,9 @@ html {
 html, body {
   width: 100%;
   max-width: 100vw;
-  overflow-x: hidden;
+  /* `clip` instead of `hidden`: hidden makes these scroll containers, which
+     stops position:sticky from pinning (events section card stack). */
+  overflow-x: clip;
 }
 
 body {

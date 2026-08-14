@@ -12,6 +12,7 @@ import CentreOfExcellence from "@/components/CentreOfExcellence";
 import MeetTheCrew from "@/components/MeetTheCrew";
 import UpcomingEvents from "@/components/UpcomingEvents";
 import Footer from "@/components/Footer";
+import RecruitmentBadge from "@/components/RecruitmentBadge";
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
@@ -39,6 +40,9 @@ export default function Home() {
 
           {/* Navbar */}
           <Navbar />
+
+          {/* Persistent recruitment CTA */}
+          <RecruitmentBadge />
 
           {/* Hero Section */}
           <HeroSection />

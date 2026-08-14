@@ -74,7 +74,7 @@ export default function HeroSection() {
 					animate={{ opacity: 1, y: 0 }}
 					transition={{ delay: 0.35, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
 				>
-					We Are the
+					#1
 					<br />
 					<span style={{ color: "#05C770" }}>HackerRank</span>
 					<br />

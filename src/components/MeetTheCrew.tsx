@@ -12,89 +12,154 @@ import Saii from "@/assets/Saii.png";
 import Purva from "@/assets/Purva.png";
 import Nischay from "@/assets/Nischay.png";
 import Ranvir from "@/assets/Ranvir.png";
+import Shlok from "@/assets/Shlok.jpeg";
 
+/**
+ * To finish a member: drop their photo in src/assets, import it and set `image`,
+ * then replace the "#" placeholders with their real profile URLs. Anything left
+ * as "#" renders as a dimmed, non-clickable icon.
+ */
 interface CrewMember {
   name: string;
   role: string;
-  image: StaticImageData;
-  github?: string;
-  linkedin?: string;
+  image?: StaticImageData;
+  github: string;
+  linkedin: string;
+}
+
+const TBD = "#";
+
+interface DomainGroup {
+  domain: string;
+  members: CrewMember[];
 }
 
 // ─── Data ──────────────────────────────────────────────────────────────────────
-const presidentAndVPs: CrewMember[] = [
-  { 
-    name: "Arnav Puggal", 
-    role: "President", 
-    image: Arnav, 
-    github: "https://github.com/12asascoder", 
-    linkedin: "https://www.linkedin.com/in/arnav-puggal/" 
-  },
-  { 
-    name: "Ayush Sharma", 
-    role: "Vice President", 
-    image: Ayush, 
-    github: "https://github.com/itzayush18", 
-    linkedin: "https://www.linkedin.com/in/itsayush18/" 
-  },
-  { 
-    name: "Vishesh Jhabak", 
-    role: "Vice President", 
-    image: Vishesh, 
-    github: "#", 
-    linkedin: "https://www.linkedin.com/in/vishesh-jhabak-a7b000327" 
-  },
-  { 
-    name: "Aryan Gupta", 
-    role: "Vice President", 
-    image: Aryan, 
-    github: "https://github.com/Aryan27-max", 
-    linkedin: "https://www.linkedin.com/in/aryan-gupta-1058aa209/" 
+const leadership: CrewMember[] = [
+  {
+    name: "Arnav Puggal",
+    role: "Founder",
+    image: Arnav,
+    github: "https://github.com/12asascoder",
+    linkedin: "https://www.linkedin.com/in/arnav-puggal/",
   },
 ];
 
-const leads: CrewMember[] = [
-  { 
-    name: "Anish Mall", 
-    role: "Technical Lead", 
-    image: Anish, 
-    github: "https://github.com/anish-9387", 
-    linkedin: "https://www.linkedin.com/in/anish-mall/" 
+
+const vicePresidents: CrewMember[] = [
+  {
+    name: "Ayush Sharma",
+    role: "Vice President",
+    image: Ayush,
+    github: "https://github.com/itzayush18",
+    linkedin: "https://www.linkedin.com/in/itsayush18/",
   },
-  { 
-    name: "Aashi Soni", 
-    role: "Technical Lead", 
-    image: Aashi, 
-    github: "https://github.com/aashisoni000", 
-    linkedin: "https://www.linkedin.com/in/aashisoni/" 
+  {
+    name: "Vishesh Jhabak",
+    role: "Vice President",
+    image: Vishesh,
+    github: TBD,
+    linkedin: "https://www.linkedin.com/in/vishesh-jhabak-a7b000327",
   },
-  { 
-    name: "Saii", 
-    role: "Creatives Lead", 
-    image: Saii, 
-    github: "#", 
-    linkedin: "https://www.linkedin.com/in/sai-shraavya-badrinath-48aa48323" 
+  {
+    name: "Aryan Gupta",
+    role: "Vice President",
+    image: Aryan,
+    github: "https://github.com/Aryan27-max",
+    linkedin: "https://www.linkedin.com/in/aryan-gupta-1058aa209/",
   },
-  { 
-    name: "Purva Jain", 
-    role: "Creatives Lead", 
-    image: Purva, 
-    github: "https://github.com/purvajain-git", 
-    linkedin: "https://www.linkedin.com/in/purva-jain17" 
+];
+
+const secretaries: CrewMember[] = [
+  {
+    name: "Purva Jain",
+    role: "Secretary",
+    image: Purva,
+    github: "https://github.com/purvajain-git",
+    linkedin: "https://www.linkedin.com/in/purva-jain17",
   },
-  { 
-    name: "Nischay Naman", 
-    role: "Corporate Lead", 
-    image: Nischay, 
-    github: "https://github.com/NischayNN", 
-    linkedin: "https://www.linkedin.com/in/nischaynaman-303938379" 
+  { name: "Sumantha Dash", role: "Joint Secretary", github: TBD, linkedin: TBD },
+];
+
+const domainHeads: DomainGroup[] = [
+  {
+    domain: "Technical",
+    members: [
+      {
+        name: "Anish Mall",
+        role: "Technical Head",
+        image: Anish,
+        github: "https://github.com/anish-9387",
+        linkedin: "https://www.linkedin.com/in/anish-mall/",
+      },
+      { name: "Shlok Agarwal", 
+        role: "Technical Head", 
+        image: Shlok,
+        github: TBD, 
+        linkedin: TBD },
+    ],
   },
-  { 
-    name: "Ranvir Singh", 
-    role: "Corporate Lead", 
-    image: Ranvir, 
-    github: "https://github.com/rs7185-lab", 
-    linkedin: "https://www.linkedin.com/in/ranvir-singh-268222383" 
+  {
+    domain: "Creative",
+    members: [
+      {
+        name: "Sai",
+        role: "Creative Head",
+        image: Saii,
+        github: TBD,
+        linkedin: "https://www.linkedin.com/in/sai-shraavya-badrinath-48aa48323",
+      },
+      { name: "Nikhil", role: "Creative Head", github: TBD, linkedin: TBD },
+    ],
+  },
+  {
+    domain: "Corporate",
+    members: [
+      {
+        name: "Ranvir Singh",
+        role: "Corporate Head",
+        image: Ranvir,
+        github: "https://github.com/rs7185-lab",
+        linkedin: "https://www.linkedin.com/in/ranvir-singh-268222383",
+      },
+      { name: "Abhinash", role: "Corporate Head", github: TBD, linkedin: TBD },
+    ],
+  },
+];
+
+const domainLeads: DomainGroup[] = [
+  {
+    domain: "Technical",
+    members: [
+      {
+        name: "Aashi Soni",
+        role: "Technical Lead",
+        image: Aashi,
+        github: "https://github.com/aashisoni000",
+        linkedin: "https://www.linkedin.com/in/aashisoni/",
+      },
+      { name: "Shanaya", role: "Technical Lead", github: TBD, linkedin: TBD },
+    ],
+  },
+  {
+    domain: "Creative",
+    members: [
+      { name: "Naisha", role: "Creative Lead", github: TBD, linkedin: TBD },
+      { name: "Abhay", role: "Creative Lead", github: TBD, linkedin: TBD },
+    ],
+  },
+  {
+    domain: "Corporate",
+    members: [
+      { name: "Arya", role: "Corporate Lead", github: TBD, linkedin: TBD },
+      {
+        name: "Nischay Naman",
+        role: "Corporate Lead",
+        image: Nischay,
+        github: "https://github.com/NischayNN",
+        linkedin: "https://www.linkedin.com/in/nischaynaman-303938379",
+      },
+    ],
   },
 ];
 
@@ -115,13 +180,55 @@ function LinkedinIcon() {
   );
 }
 
+function initialsOf(name: string) {
+  return name
+    .split(" ")
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((part) => part[0]?.toUpperCase() ?? "")
+    .join("");
+}
+
+/** Renders a live link, or a dimmed non-clickable icon while the URL is still "#". */
+function SocialLink({
+  href,
+  label,
+  hoverClass,
+  children,
+}: {
+  href: string;
+  label: string;
+  hoverClass: string;
+  children: React.ReactNode;
+}) {
+  if (!href || href === TBD) {
+    return (
+      <span className="p-1 text-white/12" title={`${label} — coming soon`} aria-hidden="true">
+        {children}
+      </span>
+    );
+  }
+
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={`text-white/35 transition-colors duration-200 p-1 ${hoverClass}`}
+      aria-label={label}
+    >
+      {children}
+    </a>
+  );
+}
+
 // ─── Card ──────────────────────────────────────────────────────────────────────
-function CrewCard({ member }: { member: CrewMember }) {
+function CrewCard({ member, width }: { member: CrewMember; width: string }) {
   return (
     <motion.div
       className="relative flex flex-col shrink-0 rounded-[10px] overflow-hidden"
       style={{
-        width: "clamp(140px, 35vw, 240px)",
+        width,
         background: "#111111",
         border: "1px solid rgba(255,255,255,0.07)",
         pointerEvents: "auto",
@@ -142,23 +249,41 @@ function CrewCard({ member }: { member: CrewMember }) {
       </div>
 
       <div className="relative w-full" style={{ aspectRatio: "1 / 1" }}>
-        <Image
-          src={member.image}
-          alt={member.name}
-          fill
-          className="object-cover"
-          sizes="(max-width: 640px) 140px, 240px"
-        />
+        {member.image ? (
+          <Image
+            src={member.image}
+            alt={member.name}
+            fill
+            className="object-cover"
+            sizes="(max-width: 640px) 160px, 240px"
+          />
+        ) : (
+          <div
+            className="absolute inset-0 flex items-center justify-center"
+            style={{
+              background:
+                "radial-gradient(80% 80% at 50% 0%, rgba(5,199,112,0.16), transparent 70%), #0b0b0b",
+            }}
+          >
+            <span
+              className="font-black tracking-tight text-white/25"
+              style={{ fontSize: "clamp(24px, 5vw, 46px)" }}
+            >
+              {initialsOf(member.name)}
+            </span>
+          </div>
+        )}
       </div>
 
+      {/* Fixed height so a long name never makes one card taller than its row */}
       <div
-        className="flex items-center justify-between px-2 py-2 gap-2"
-        style={{ background: "#0f0f0f" }}
+        className="flex items-center justify-between px-2 py-2 gap-1"
+        style={{ background: "#0f0f0f", height: 50 }}
       >
         <div className="min-w-0 flex-1">
           <p
             className="font-bold leading-tight text-white truncate"
-            style={{ fontSize: "clamp(10px, 2.5vw, 14px)" }}
+            style={{ fontSize: "clamp(10px, 2.2vw, 13px)" }}
           >
             {member.name}
           </p>
@@ -170,29 +295,75 @@ function CrewCard({ member }: { member: CrewMember }) {
           </p>
         </div>
         <div className="flex gap-1.5 shrink-0">
-          {member.github && member.github !== "#" && (
-            <a
-              href={member.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-white/35 hover:text-white transition-colors duration-200 p-1"
-              aria-label={`${member.name} GitHub`}
-            >
-              <GithubIcon />
-            </a>
-          )}
-          {member.linkedin && member.linkedin !== "#" && (
-            <a
-              href={member.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-white/35 hover:text-[#0A66C2] transition-colors duration-200 p-1"
-              aria-label={`${member.name} LinkedIn`}
-            >
-              <LinkedinIcon />
-            </a>
-          )}
+          <SocialLink
+            href={member.github}
+            label={`${member.name} GitHub`}
+            hoverClass="hover:text-white"
+          >
+            <GithubIcon />
+          </SocialLink>
+          <SocialLink
+            href={member.linkedin}
+            label={`${member.name} LinkedIn`}
+            hoverClass="hover:text-[#0A66C2]"
+          >
+            <LinkedinIcon />
+          </SocialLink>
         </div>
+      </div>
+    </motion.div>
+  );
+}
+
+// ─── Layout helpers ────────────────────────────────────────────────────────────
+const fadeUp = {
+  initial: { opacity: 0, y: 40 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, amount: 0.2 } as const,
+  transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] as const },
+};
+
+function GroupHeading({ children }: { children: React.ReactNode }) {
+  return (
+    <h3
+      className="font-black text-center mb-4"
+      style={{ fontSize: "clamp(1.15rem, 2.2vw, 1.5rem)", lineHeight: 1, color: "#05C770" }}
+    >
+      {children}
+    </h3>
+  );
+}
+
+function CrewRow({ title, members }: { title: string; members: CrewMember[] }) {
+  return (
+    <motion.div className="w-full flex flex-col items-center mt-10 pointer-events-none" {...fadeUp}>
+      <GroupHeading>{title}</GroupHeading>
+      <div className="flex flex-wrap justify-center gap-3 md:gap-5 items-start">
+        {members.map((member) => (
+          <CrewCard key={member.name} member={member} width="clamp(150px, 38vw, 230px)" />
+        ))}
+      </div>
+    </motion.div>
+  );
+}
+
+function DomainRow({ title, groups }: { title: string; groups: DomainGroup[] }) {
+  return (
+    <motion.div className="w-full flex flex-col items-center mt-12 pointer-events-none" {...fadeUp}>
+      <GroupHeading>{title}</GroupHeading>
+      <div className="grid w-full grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-4 md:gap-6">
+        {groups.map((group) => (
+          <div key={group.domain} className="flex flex-col items-center">
+            <span className="mb-3 text-[10px] font-bold uppercase tracking-[0.28em] text-white/40">
+              {group.domain}
+            </span>
+            <div className="flex flex-wrap justify-center gap-3 items-start">
+              {group.members.map((member) => (
+                <CrewCard key={member.name} member={member} width="clamp(135px, 33vw, 158px)" />
+              ))}
+            </div>
+          </div>
+        ))}
       </div>
     </motion.div>
   );
@@ -208,7 +379,7 @@ export default function MeetTheCrew() {
     >
       <div className="max-w-275 w-full mx-auto pointer-events-none">
         <motion.div
-          className="relative z-10 text-center px-4 mb-8"
+          className="relative z-10 text-center px-4"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -222,33 +393,11 @@ export default function MeetTheCrew() {
           </h2>
         </motion.div>
 
-        {/* ── President & Vice Presidents ── */}
-        <div className="w-full flex flex-col items-center mt-6 pointer-events-none">
-          <div className="max-w-3xl w-full text-center mb-4">
-            <h3 className="font-black text-white" style={{ fontSize: "clamp(1.2rem, 2.2vw, 1.5rem)", lineHeight: 1 }}>
-              <span style={{ color: "#05C770" }}>President &amp; Vice Presidents</span>
-            </h3>
-          </div>
-          <div className="flex flex-wrap justify-center gap-3 md:gap-5 px-4 md:px-10 items-center py-2">
-            {presidentAndVPs.map((member) => (
-              <CrewCard key={member.name} member={member} />
-            ))}
-          </div>
-        </div>
-
-        {/* ── Domain Leads ── */}
-        <div className="w-full flex flex-col items-center mt-6 pointer-events-none">
-          <div className="max-w-3xl w-full text-center mb-4">
-            <h3 className="font-black text-white" style={{ fontSize: "clamp(1.2rem, 2.2vw, 1.5rem)", lineHeight: 1 }}>
-              <span style={{ color: "#05C770" }}>Domain Leads</span>
-            </h3>
-          </div>
-          <div className="flex flex-wrap justify-center gap-3 md:gap-5 px-4 md:px-10 items-center py-2">
-            {leads.map((member) => (
-              <CrewCard key={member.name} member={member} />
-            ))}
-          </div>
-        </div>
+        <CrewRow title="Founder & President" members={leadership} />
+        <CrewRow title="Vice Presidents" members={vicePresidents} />
+        <CrewRow title="Secretary & Joint Secretary" members={secretaries} />
+        <DomainRow title="Domain Heads" groups={domainHeads} />
+        <DomainRow title="Domain Leads" groups={domainLeads} />
       </div>
     </section>
   );

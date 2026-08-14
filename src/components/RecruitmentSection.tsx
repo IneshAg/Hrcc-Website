@@ -2,6 +2,8 @@
 
 import { motion } from "framer-motion";
 
+import { RECRUITMENT_FORM_URL } from "@/lib/links";
+
 export default function RecruitmentSection() {
   return (
     <section
@@ -38,7 +40,9 @@ export default function RecruitmentSection() {
             {/* Arrow / send icon in bottom-right */}
             <div className="flex justify-end mt-8">
               <a
-                href="#contact"
+                href={RECRUITMENT_FORM_URL}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-[#0a0a0a] hover:scale-110 transition-transform duration-300"
                 aria-label="Apply now"
               >
