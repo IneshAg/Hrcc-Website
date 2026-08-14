@@ -14,6 +14,8 @@ import Nischay from "@/assets/Nischay.png";
 import Ranvir from "@/assets/Ranvir.png";
 import Shlok from "@/assets/Shlok.jpeg";
 import Jushiya from "@/assets/Jushiya.jpeg";
+import Avinash from "@/assets/Avinash.jpeg";
+import ShanayaImage from "@/assets/Shanaya.jpeg";
 
 /**
  * To finish a member: drop their photo in src/assets, import it and set `image`,
@@ -82,14 +84,14 @@ const vicePresidents: CrewMember[] = [
 ];
 
 const secretaries: CrewMember[] = [
+  { name: "Sumantha Dash", role: "Secretary", github: TBD, linkedin: TBD },
   {
     name: "Purva Jain",
-    role: "Secretary",
+    role: "Joint Secretary",
     image: Purva,
     github: "https://github.com/purvajain-git",
     linkedin: "https://www.linkedin.com/in/purva-jain17",
   },
-  { name: "Sumantha Dash", role: "Joint Secretary", github: TBD, linkedin: TBD },
 ];
 
 const domainHeads: DomainGroup[] = [
@@ -133,7 +135,13 @@ const domainHeads: DomainGroup[] = [
         github: "https://github.com/rs7185-lab",
         linkedin: "https://www.linkedin.com/in/ranvir-singh-268222383",
       },
-      { name: "Abhinash", role: "Corporate Head", github: TBD, linkedin: TBD },
+      {
+        name: "Abhinash",
+        role: "Corporate Head",
+        image: Avinash,
+        github: TBD,
+        linkedin: TBD,
+      },
     ],
   },
 ];
@@ -149,7 +157,13 @@ const domainLeads: DomainGroup[] = [
         github: "https://github.com/aashisoni000",
         linkedin: "https://www.linkedin.com/in/aashisoni/",
       },
-      { name: "Shanaya", role: "Technical Lead", github: TBD, linkedin: TBD },
+      {
+        name: "Shanaya",
+        role: "Technical Lead",
+        image: ShanayaImage,
+        github: TBD,
+        linkedin: TBD,
+      },
     ],
   },
   {

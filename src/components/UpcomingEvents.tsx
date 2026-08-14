@@ -81,6 +81,7 @@ const events: EventItem[] = [
       </div>
     ),
     images: [aprilhackathon],
+    portrait: true,
     titleColor: "#05C770",
     yearColor: "#4A90D9",
   },
@@ -245,9 +246,7 @@ function EventCard({
                 src={event.images[0]}
                 alt={`${event.id} photo`}
                 fill
-                className={
-                  event.portrait ? "object-contain" : "object-contain lg:object-cover"
-                }
+                className="object-contain"
                 sizes="(max-width: 1024px) 100vw, 320px"
               />
             ) : (
