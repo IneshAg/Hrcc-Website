@@ -11,6 +11,7 @@ import DomainsSection from "@/components/DomainsSection";
 import CentreOfExcellence from "@/components/CentreOfExcellence";
 import MeetTheCrew from "@/components/MeetTheCrew";
 import UpcomingEvents from "@/components/UpcomingEvents";
+import OurWork from "@/components/OurWork";
 import Footer from "@/components/Footer";
 import RecruitmentBadge from "@/components/RecruitmentBadge";
 
@@ -58,6 +59,9 @@ export default function Home() {
 
           {/* Upcoming Events */}
           <UpcomingEvents />
+
+          {/* Our Work Section */}
+          <OurWork />
 
           {/* Spacer before Footer */}
           <div className="h-32"></div>
