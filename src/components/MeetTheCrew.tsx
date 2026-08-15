@@ -14,7 +14,6 @@ import Purva from "@/assets/Purva.png";
 import Nischay from "@/assets/Nischay.png";
 import Ranvir from "@/assets/Ranvir.png";
 import Shlok from "@/assets/Shlok.jpeg";
-import Jushiya from "@/assets/Jushiya.jpeg";
 import Avinash from "@/assets/Avinash.jpeg";
 import ShanayaImage from "@/assets/Shanaya.jpeg";
 import Nikhil from "@/assets/Nikhil.jpeg";
@@ -56,14 +55,7 @@ const founder: CrewMember[] = [
 ];
 
 const president: CrewMember[] = [
-  {
-    name: "Jushiya Grover",
-    role: "President & Campus Ambassador",
-    image: Jushiya,
-    isSecret: true,
-    github: TBD,
-    linkedin: TBD,
-  },
+
 ];
 
 
