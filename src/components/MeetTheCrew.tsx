@@ -18,6 +18,9 @@ import Jushiya from "@/assets/Jushiya.jpeg";
 import Avinash from "@/assets/Avinash.jpeg";
 import ShanayaImage from "@/assets/Shanaya.jpeg";
 import Nikhil from "@/assets/Nikhil.jpeg";
+import Abhay from "@/assets/Abhay.jpeg";
+import Arya from "@/assets/Arya.jpeg";
+import Naisha from "@/assets/Naisha.jpeg";
 
 /**
  * To finish a member: drop their photo in src/assets, import it and set `image`,
@@ -111,11 +114,13 @@ const domainHeads: DomainGroup[] = [
         github: "https://github.com/anish-9387",
         linkedin: "https://www.linkedin.com/in/anish-mall/",
       },
-      { name: "Shlok Agarwal", 
-        role: "Technical Head", 
+      {
+        name: "Shlok Agarwal",
+        role: "Technical Head",
         image: Shlok,
-        github: "https://github.com/Shlok-2006", 
-        linkedin: "https://www.linkedin.com/in/shlok0606/" },
+        github: "https://github.com/Shlok-2006",
+        linkedin: "https://www.linkedin.com/in/shlok0606/"
+      },
     ],
   },
   {
@@ -149,7 +154,7 @@ const domainHeads: DomainGroup[] = [
         linkedin: "https://www.linkedin.com/in/ranvir-singh-268222383",
       },
       {
-        name: "Abhinash",
+        name: "Avinash K",
         role: "Corporate Head",
         image: Avinash,
         github: TBD,
@@ -182,14 +187,33 @@ const domainLeads: DomainGroup[] = [
   {
     domain: "Creative",
     members: [
-      { name: "Naisha", role: "Creative Lead", github: TBD, linkedin: TBD },
-      { name: "Abhay", role: "Creative Lead", github: TBD, linkedin: TBD },
+      {
+        name: "Naisha Sharma",
+        role: "Creative Lead",
+        image: Naisha,
+        imagePosition: "center top",
+        github: TBD,
+        linkedin: TBD,
+      },
+      {
+        name: "Abhay Singh Chouhan",
+        role: "Creative Lead",
+        image: Abhay,
+        github: "https://github.com/abhaycore",
+        linkedin: "https://www.linkedin.com/in/abhay-singh-chouhan-2b52aa353",
+      },
     ],
   },
   {
     domain: "Corporate",
     members: [
-      { name: "Arya", role: "Corporate Lead", github: TBD, linkedin: TBD },
+      {
+        name: "Arya Phanase",
+        role: "Corporate Lead",
+        image: Arya,
+        github: TBD,
+        linkedin: TBD,
+      },
       {
         name: "Nischay Naman",
         role: "Corporate Lead",
@@ -274,9 +298,8 @@ function CrewCard({ member, width }: { member: CrewMember; width: string }) {
   return (
     <motion.div
       onClick={handleCardClick}
-      className={`relative flex flex-col shrink-0 rounded-[10px] overflow-hidden ${
-        member.isSecret && !isRevealed ? "cursor-pointer select-none" : ""
-      }`}
+      className={`relative flex flex-col shrink-0 rounded-[10px] overflow-hidden ${member.isSecret && !isRevealed ? "cursor-pointer select-none" : ""
+        }`}
       style={{
         width,
         background: "#111111",
@@ -340,9 +363,8 @@ function CrewCard({ member, width }: { member: CrewMember; width: string }) {
                 {[1, 2, 3].map((step) => (
                   <div
                     key={step}
-                    className={`h-1 rounded-full transition-all duration-300 ${
-                      step <= clicks ? "w-3.5 bg-[#05C770]" : "w-1.5 bg-white/15"
-                    }`}
+                    className={`h-1 rounded-full transition-all duration-300 ${step <= clicks ? "w-3.5 bg-[#05C770]" : "w-1.5 bg-white/15"
+                      }`}
                   />
                 ))}
               </div>

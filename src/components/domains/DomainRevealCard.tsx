@@ -291,8 +291,8 @@ export default function DomainRevealCard({
           sizes="(max-width: 768px) 100vw, 1400px"
           priority={index === 0}
         />
-        <div className="absolute inset-0 bg-linear-to-r from-black/96 via-black/82 to-black/65" />
-        <div className="absolute inset-0 bg-linear-to-t from-black/85 via-transparent to-black/45" />
+        <div className="absolute inset-0 bg-linear-to-r from-black/65 via-black/40 to-black/20" />
+        <div className="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-black/20" />
         <div
           className="absolute inset-0 opacity-[0.07]"
           style={{
