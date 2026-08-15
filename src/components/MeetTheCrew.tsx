@@ -20,6 +20,7 @@ import Nikhil from "@/assets/Nikhil.jpeg";
 import Abhay from "@/assets/Abhay.jpeg";
 import Arya from "@/assets/Arya.jpeg";
 import Naisha from "@/assets/Naisha.jpeg";
+import Sumantha from "@/assets/Sumantha.jpeg";
 
 /**
  * To finish a member: drop their photo in src/assets, import it and set `image`,
@@ -90,7 +91,13 @@ const vicePresidents: CrewMember[] = [
 ];
 
 const secretaries: CrewMember[] = [
-  { name: "Sumantha Dash", role: "Secretary", github: TBD, linkedin: TBD },
+  {
+    name: "Sumantha Dash",
+    role: "Secretary",
+    image: Sumantha,
+    github: TBD,
+    linkedin: TBD,
+  },
   {
     name: "Purva Jain",
     role: "Joint Secretary",
