@@ -55,7 +55,13 @@ const founder: CrewMember[] = [
 ];
 
 const president: CrewMember[] = [
-
+  {
+    name: "Jushiya Grover",
+    role: "President & Campus Ambassador",
+    isSecret: true,
+    github: TBD,
+    linkedin: TBD,
+  },
 ];
 
 
