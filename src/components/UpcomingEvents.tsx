@@ -114,18 +114,18 @@ const events: EventItem[] = [
             href="https://hrcc-infinityhacks.vercel.app/"
             target="_blank"
             rel="noopener noreferrer"
-            className="group/reg inline-flex items-center gap-2 rounded-full bg-[#05C770] px-5 py-2 text-xs font-bold text-black transition-transform duration-300 hover:scale-[1.04] sm:py-2.5 sm:text-sm"
+            className="group/reg inline-flex items-center gap-2.5 rounded-xl bg-[#05C770] px-6 py-3 text-sm font-extrabold tracking-wide text-black shadow-lg shadow-[#05C770]/25 transition-all duration-300 hover:bg-[#04b264] hover:shadow-xl hover:shadow-[#05C770]/40 hover:scale-[1.04] active:scale-[0.98] sm:px-7 sm:py-3.5 sm:text-base"
           >
             Register Now
             <svg
-              className="h-4 w-4 transition-transform duration-300 group-hover/reg:translate-x-1"
+              className="h-4 w-4 transition-transform duration-300 group-hover/reg:translate-x-1 sm:h-5 sm:w-5"
               viewBox="0 0 24 24"
               fill="none"
             >
               <path
                 d="M5 12h13M13 6l6 6-6 6"
                 stroke="currentColor"
-                strokeWidth="2"
+                strokeWidth="2.5"
                 strokeLinecap="round"
                 strokeLinejoin="round"
               />
@@ -162,23 +162,23 @@ const events: EventItem[] = [
         <p className="font-bold text-gray-900">
           Bring the idea. Build the solution. Own the challenge.
         </p>
-        <div className="mt-0.5 flex flex-wrap items-center justify-center gap-3 lg:justify-start">
+        <div className="mt-1 flex flex-wrap items-center justify-center gap-4 lg:justify-start">
           <a
             href="https://luma.com/rr8pcs58"
             target="_blank"
             rel="noopener noreferrer"
-            className="group/reg inline-flex items-center gap-2 rounded-full bg-[#05C770] px-5 py-2 text-xs font-bold text-black transition-transform duration-300 hover:scale-[1.04] sm:py-2.5 sm:text-sm"
+            className="group/reg inline-flex items-center gap-2.5 rounded-xl bg-[#05C770] px-6 py-3 text-sm font-extrabold tracking-wide text-black shadow-lg shadow-[#05C770]/25 transition-all duration-300 hover:bg-[#04b264] hover:shadow-xl hover:shadow-[#05C770]/40 hover:scale-[1.04] active:scale-[0.98] sm:px-7 sm:py-3.5 sm:text-base"
           >
             Register Now
             <svg
-              className="h-4 w-4 transition-transform duration-300 group-hover/reg:translate-x-1"
+              className="h-4 w-4 transition-transform duration-300 group-hover/reg:translate-x-1 sm:h-5 sm:w-5"
               viewBox="0 0 24 24"
               fill="none"
             >
               <path
                 d="M5 12h13M13 6l6 6-6 6"
                 stroke="currentColor"
-                strokeWidth="2"
+                strokeWidth="2.5"
                 strokeLinecap="round"
                 strokeLinejoin="round"
               />
