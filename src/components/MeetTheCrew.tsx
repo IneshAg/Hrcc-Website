@@ -48,7 +48,7 @@ interface DomainGroup {
 const founder: CrewMember[] = [
   {
     name: "Arnav Puggal",
-    role: "Founder & Ex-Chairperson",
+    role: "Founder & Chairperson",
     image: Arnav,
     github: "https://github.com/12asascoder",
     linkedin: "https://www.linkedin.com/in/arnav-puggal/",
