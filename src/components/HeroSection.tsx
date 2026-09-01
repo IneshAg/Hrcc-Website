@@ -76,7 +76,16 @@ export default function HeroSection() {
 				>
 					#1
 					<br />
-					<span style={{ color: "#05C770" }}>HackerRank</span>
+					<span className="inline-flex items-center gap-[0.14em]">
+						<span style={{ color: "#05C770" }}>HackerRank</span>
+						<span
+							className="inline-block bg-[#05C770] rounded-none shrink-0"
+							style={{
+								width: "0.72em",
+								height: "0.92em",
+							}}
+						/>
+					</span>
 					<br />
 					Campus Crew
 				</motion.h1>

@@ -46,10 +46,10 @@ export default function Navbar() {
         initial={{ y: -80, opacity: 0 }}
         animate={{ y: visible ? 0 : -90, opacity: visible ? 1 : 0 }}
         transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-        className="hidden lg:flex fixed top-6 left-1/2 -translate-x-1/2 z-50 pointer-events-auto whitespace-nowrap"
+        className="hidden lg:flex fixed top-5 left-6 right-6 max-w-6xl mx-auto z-50 pointer-events-auto"
       >
         <nav
-          className="flex items-center gap-1 px-2 py-2 rounded-full"
+          className="w-full flex items-center justify-between px-4 py-2.5 rounded-full"
           style={{
             background: "rgba(14, 14, 14, 0.88)",
             border: "1px solid rgba(255,255,255,0.10)",
@@ -58,57 +58,69 @@ export default function Navbar() {
             WebkitBackdropFilter: "blur(24px)",
           }}
         >
-          {navLinks.map((link) => {
-            const id = link.href.replace("#", "");
-            const isActive = active === id;
-            const isHovered = hovered === id;
-
-            let bg = "transparent";
-            let color = "rgba(255,255,255,0.45)";
-            if (isActive) { bg = "rgba(255,255,255,0.97)"; color = "#0a0a12"; }
-            else if (isHovered) { bg = "rgba(255,255,255,0.08)"; color = "rgba(255,255,255,0.85)"; }
-
-            return (
-              <a
-                key={id}
-                href={link.href}
-                onClick={() => setActive(id)}
-                onMouseEnter={() => setHovered(id)}
-                onMouseLeave={() => setHovered(null)}
-                className="inline-flex items-center px-5 py-2 rounded-full text-[13px] tracking-wide transition-all duration-200"
-                style={{
-                  background: bg,
-                  color,
-                  fontWeight: isActive ? 500 : 400,
-                  boxShadow: isActive ? "0 1px 12px rgba(255,255,255,0.10)" : "none",
-                }}
-              >
-                {link.label}
-              </a>
-            );
-          })}
-
-          {/* Divider */}
-          <div className="w-px h-5 mx-1.5 shrink-0 bg-white/10" />
-
-          {/* CTA */}
-          <a
-            href="mailto:hrccsrm@gmail.com"
-            onMouseEnter={() => setHovered("contact")}
-            onMouseLeave={() => setHovered(null)}
-            className="inline-flex items-center px-5 py-2 rounded-full text-[13px] font-semibold tracking-wide transition-all duration-200"
-            style={{
-              background: "#05C770",
-              color: "#fff",
-              opacity: hovered === "contact" ? 0.85 : 1,
-              boxShadow:
-                hovered === "contact"
-                  ? "0 0 0 1px rgba(5,199,112,0.6), 0 4px 18px rgba(5,199,112,0.4)"
-                  : "0 0 0 1px rgba(5,199,112,0.35), 0 2px 10px rgba(5,199,112,0.2)",
-            }}
-          >
-            Contact Us
+          {/* Brand Left */}
+          <a href="#home" className="flex items-center gap-3 pl-2 group">
+            <div className="w-8 h-8 rounded-lg bg-black border border-white/20 flex items-center justify-center p-1 shrink-0 group-hover:border-[#05C770] transition-colors">
+              <Image src={logo} alt="HRCC Logo" width={22} height={22} className="object-contain" />
+            </div>
+            <span className="font-extrabold text-white text-base tracking-wider group-hover:text-[#05C770] transition-colors">
+              HRCC
+            </span>
           </a>
+
+          {/* Center Links */}
+          <div className="flex items-center gap-1">
+            {navLinks.map((link) => {
+              const id = link.href.replace("#", "");
+              const isActive = active === id;
+              const isHovered = hovered === id;
+
+              let bg = "transparent";
+              let color = "rgba(255,255,255,0.55)";
+              if (isActive) { bg = "rgba(255,255,255,0.97)"; color = "#0a0a12"; }
+              else if (isHovered) { bg = "rgba(255,255,255,0.10)"; color = "#fff"; }
+
+              return (
+                <a
+                  key={id}
+                  href={link.href}
+                  onClick={() => setActive(id)}
+                  onMouseEnter={() => setHovered(id)}
+                  onMouseLeave={() => setHovered(null)}
+                  className="inline-flex items-center px-4 py-2 rounded-full text-[13px] tracking-wide transition-all duration-200"
+                  style={{
+                    background: bg,
+                    color,
+                    fontWeight: isActive ? 600 : 400,
+                    boxShadow: isActive ? "0 1px 12px rgba(255,255,255,0.10)" : "none",
+                  }}
+                >
+                  {link.label}
+                </a>
+              );
+            })}
+          </div>
+
+          {/* Right CTA */}
+          <div className="pr-1">
+            <a
+              href="mailto:hrccsrm@gmail.com"
+              onMouseEnter={() => setHovered("contact")}
+              onMouseLeave={() => setHovered(null)}
+              className="inline-flex items-center px-5 py-2 rounded-full text-[13px] font-semibold tracking-wide transition-all duration-200"
+              style={{
+                background: "#05C770",
+                color: "#fff",
+                opacity: hovered === "contact" ? 0.9 : 1,
+                boxShadow:
+                  hovered === "contact"
+                    ? "0 0 0 1px rgba(5,199,112,0.6), 0 4px 18px rgba(5,199,112,0.4)"
+                    : "0 0 0 1px rgba(5,199,112,0.35), 0 2px 10px rgba(5,199,112,0.2)",
+              }}
+            >
+              Contact Us
+            </a>
+          </div>
         </nav>
       </motion.header>
 
@@ -120,7 +132,7 @@ export default function Navbar() {
         className="lg:hidden fixed top-4 left-4 right-4 z-50 pointer-events-auto"
       >
         <nav
-          className="flex items-center justify-between px-4 py-3 rounded-full"
+          className="flex items-center justify-between px-4 py-2.5 rounded-full"
           style={{
             background: "rgba(14, 14, 14, 0.88)",
             border: "1px solid rgba(255,255,255,0.10)",
@@ -129,15 +141,15 @@ export default function Navbar() {
             WebkitBackdropFilter: "blur(24px)",
           }}
         >
-          {/* Logo/Brand */}
-          <div className="relative w-12 h-12">
-            <Image
-              src={logo}
-              alt="HRCC Logo"
-              fill
-              className="object-contain"
-            />
-          </div>
+          {/* Brand Left */}
+          <a href="#home" className="flex items-center gap-2.5">
+            <div className="w-8 h-8 rounded-lg bg-black border border-white/20 flex items-center justify-center p-1 shrink-0">
+              <Image src={logo} alt="HRCC Logo" width={20} height={20} className="object-contain" />
+            </div>
+            <span className="font-extrabold text-white text-base tracking-wider">
+              HRCC
+            </span>
+          </a>
 
           {/* Mobile Menu Button */}
           <button
