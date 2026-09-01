@@ -96,11 +96,11 @@ const vicePresidents: CrewMember[] = [
 
 const secretaries: CrewMember[] = [
   {
-    name: "Sumantha Dash",
+    name: "Sumant Dash",
     role: "Secretary",
     image: Sumantha,
-    github: TBD,
-    linkedin: TBD,
+    github: "https://github.com/sumantdash-ai",
+    linkedin: "https://www.linkedin.com/in/sumant-dash-6377a8324?utm_source=share_via&utm_content=profile&utm_medium=member_ios",
   },
   {
     name: "Purva Jain",
