@@ -300,17 +300,20 @@ function CrewCard({
   cardRef,
   onTripleClick,
   isShockActive = false,
+  isRevealed = false,
 }: {
   member: CrewMember;
   width: string;
   cardRef?: React.RefObject<HTMLDivElement | null>;
   onTripleClick?: () => void;
   isShockActive?: boolean;
+  isRevealed?: boolean;
 }) {
   const clicksRef = useRef<number[]>([]);
+  const isCurrentlySecret = member.isSecret && !isRevealed;
 
   const handlePointerDown = () => {
-    if (!member.isSecret || !onTripleClick || isShockActive) return;
+    if (!isCurrentlySecret || !onTripleClick || isShockActive) return;
 
     const now = Date.now();
     // Keep clicks within 900ms window
@@ -329,7 +332,7 @@ function CrewCard({
       ref={cardRef}
       onPointerDown={handlePointerDown}
       className={`relative flex flex-col shrink-0 rounded-[10px] overflow-hidden ${
-        member.isSecret ? "cursor-pointer select-none" : ""
+        isCurrentlySecret ? "cursor-pointer select-none" : ""
       }`}
       style={{
         width,
@@ -389,7 +392,7 @@ function CrewCard({
       </div>
 
       <div className="relative w-full" style={{ aspectRatio: "1 / 1" }}>
-        {member.isSecret ? (
+        {isCurrentlySecret ? (
           <div
             className="absolute inset-0 flex flex-col items-center justify-center p-4 text-center select-none"
             style={{
@@ -449,14 +452,21 @@ function CrewCard({
             </div>
           </div>
         ) : member.image ? (
-          <Image
-            src={member.image}
-            alt={member.name}
-            fill
-            className="object-cover"
-            style={{ objectPosition: member.imagePosition || "center" }}
-            sizes="(max-width: 640px) 160px, 240px"
-          />
+          <motion.div
+            className="absolute inset-0"
+            initial={member.isSecret ? { opacity: 0, scale: 1.15 } : false}
+            animate={member.isSecret ? { opacity: 1, scale: 1 } : false}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+          >
+            <Image
+              src={member.image}
+              alt={member.name}
+              fill
+              className="object-cover"
+              style={{ objectPosition: member.imagePosition || "center" }}
+              sizes="(max-width: 640px) 160px, 240px"
+            />
+          </motion.div>
         ) : (
           <div
             className="absolute inset-0 flex items-center justify-center"
@@ -481,23 +491,25 @@ function CrewCard({
         style={{ background: "#0f0f0f", height: 50 }}
       >
         <div className="min-w-0 flex-1">
-          {!member.isSecret && (
-            <p
+          {!isCurrentlySecret && (
+            <motion.p
+              initial={member.isSecret ? { opacity: 0, y: 5 } : false}
+              animate={member.isSecret ? { opacity: 1, y: 0 } : false}
               className="font-bold leading-tight text-white truncate"
               style={{ fontSize: "clamp(10px, 2.2vw, 13px)" }}
             >
               {member.name}
-            </p>
+            </motion.p>
           )}
           <p
-            className={`truncate ${member.isSecret ? "font-bold text-white text-center sm:text-left" : "mt-0.5 text-white/40"}`}
-            style={{ fontSize: member.isSecret ? "clamp(10px, 2.2vw, 12px)" : "clamp(8px, 2vw, 11px)" }}
+            className={`truncate ${isCurrentlySecret ? "font-bold text-white text-center sm:text-left" : "mt-0.5 text-white/40"}`}
+            style={{ fontSize: isCurrentlySecret ? "clamp(10px, 2.2vw, 12px)" : "clamp(8px, 2vw, 11px)" }}
             title={member.role}
           >
             {member.role}
           </p>
         </div>
-        {!member.isSecret && (
+        {!isCurrentlySecret && (
           <div className="flex gap-1.5 shrink-0">
             <SocialLink
               href={member.github}
@@ -545,12 +557,14 @@ function CrewRow({
   presidentCardRef,
   onPresidentTripleClick,
   isShockActive = false,
+  isPresidentRevealed = false,
 }: {
   title: string;
   members: CrewMember[];
   presidentCardRef?: React.RefObject<HTMLDivElement | null>;
   onPresidentTripleClick?: () => void;
   isShockActive?: boolean;
+  isPresidentRevealed?: boolean;
 }) {
   const isPresidentRow = title === "President & Campus Ambassador";
 
@@ -568,6 +582,7 @@ function CrewRow({
               member.isSecret && isPresidentRow ? onPresidentTripleClick : undefined
             }
             isShockActive={member.isSecret && isPresidentRow ? isShockActive : false}
+            isRevealed={member.isSecret && isPresidentRow ? isPresidentRevealed : false}
           />
         ))}
       </div>
@@ -602,6 +617,16 @@ export default function MeetTheCrew() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const presidentCardRef = useRef<HTMLDivElement>(null);
   const [isShockActive, setIsShockActive] = useState(false);
+  const [isPresidentRevealed, setIsPresidentRevealed] = useState(false);
+
+  const handlePresidentTripleClick = () => {
+    if (isPresidentRevealed || isShockActive) return;
+    setIsShockActive(true);
+    // Reveal President at the climax of the electric shock explosion (~750ms)
+    setTimeout(() => {
+      setIsPresidentRevealed(true);
+    }, 750);
+  };
 
   return (
     <section
@@ -637,8 +662,9 @@ export default function MeetTheCrew() {
           title="President & Campus Ambassador"
           members={president}
           presidentCardRef={presidentCardRef}
-          onPresidentTripleClick={() => setIsShockActive(true)}
+          onPresidentTripleClick={handlePresidentTripleClick}
           isShockActive={isShockActive}
+          isPresidentRevealed={isPresidentRevealed}
         />
         <CrewRow title="Vice Presidents" members={vicePresidents} />
         <CrewRow title="Secretary & Joint Secretary" members={secretaries} />
