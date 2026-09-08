@@ -1,9 +1,8 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import Image, { StaticImageData } from "next/image";
-import ElectricShockEffect from "@/components/ElectricShockEffect";
 import Arnav from "@/assets/Arnav.png";
 import Ayush from "@/assets/Ayush.png";
 import Vishesh from "@/assets/Vishesh.jpeg";
@@ -63,7 +62,6 @@ const president: CrewMember[] = [
     role: "President & Campus Ambassador",
     image: Jushiya,
     imagePosition: "center top",
-    isSecret: true,
     github: TBD,
     linkedin: TBD,
   },
@@ -294,46 +292,11 @@ function SocialLink({
 }
 
 // ─── Card ──────────────────────────────────────────────────────────────────────
-function CrewCard({
-  member,
-  width,
-  cardRef,
-  onTripleClick,
-  isShockActive = false,
-  isRevealed = false,
-}: {
-  member: CrewMember;
-  width: string;
-  cardRef?: React.RefObject<HTMLDivElement | null>;
-  onTripleClick?: () => void;
-  isShockActive?: boolean;
-  isRevealed?: boolean;
-}) {
-  const clicksRef = useRef<number[]>([]);
-  const isCurrentlySecret = member.isSecret && !isRevealed;
-
-  const handlePointerDown = () => {
-    if (!isCurrentlySecret || !onTripleClick || isShockActive) return;
-
-    const now = Date.now();
-    // Keep clicks within 900ms window
-    const recent = clicksRef.current.filter((t) => now - t <= 900);
-    recent.push(now);
-    clicksRef.current = recent;
-
-    if (recent.length >= 3) {
-      clicksRef.current = [];
-      onTripleClick();
-    }
-  };
-
+// ─── Card ──────────────────────────────────────────────────────────────────────
+function CrewCard({ member, width }: { member: CrewMember; width: string }) {
   return (
     <motion.div
-      ref={cardRef}
-      onPointerDown={handlePointerDown}
-      className={`relative flex flex-col shrink-0 rounded-[10px] overflow-hidden ${
-        isCurrentlySecret ? "cursor-pointer select-none" : ""
-      }`}
+      className="relative flex flex-col shrink-0 rounded-[10px] overflow-hidden"
       style={{
         width,
         background: "#111111",
@@ -345,43 +308,7 @@ function CrewCard({
         borderColor: "#05C770",
         transition: { duration: 0.18 },
       }}
-      animate={
-        isShockActive
-          ? {
-              x: [0, -3, 3, -2, 2, -1, 1, 0],
-              y: [0, -2, 2, -1, 1, 0],
-              borderColor: [
-                "rgba(255,255,255,0.07)",
-                "#00EA8D",
-                "#00FF99",
-                "#00EA8D",
-                "rgba(255,255,255,0.07)",
-              ],
-              boxShadow: [
-                "0 0 0px transparent",
-                "0 0 35px rgba(0,234,141,0.8), inset 0 0 20px rgba(0,234,141,0.4)",
-                "0 0 45px rgba(0,255,153,0.9), inset 0 0 30px rgba(0,255,153,0.5)",
-                "0 0 20px rgba(0,234,141,0.5)",
-                "0 0 0px transparent",
-              ],
-            }
-          : undefined
-      }
-      transition={{
-        duration: isShockActive ? 1.5 : 0.18,
-        times: isShockActive ? [0, 0.1, 0.35, 0.75, 1] : undefined,
-      }}
     >
-      {/* Flash overlay on triple click */}
-      {isShockActive && (
-        <motion.div
-          className="absolute inset-0 bg-[#00EA8D]/30 z-30 pointer-events-none rounded-[10px]"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: [0, 0.9, 0.3, 0.7, 0] }}
-          transition={{ duration: 1.4 }}
-        />
-      )}
-
       <div
         className="flex items-center gap-1 px-2 py-2"
         style={{ background: "#0d0d0d", borderBottom: "1px solid rgba(255,255,255,0.05)" }}
@@ -392,81 +319,15 @@ function CrewCard({
       </div>
 
       <div className="relative w-full" style={{ aspectRatio: "1 / 1" }}>
-        {isCurrentlySecret ? (
-          <div
-            className="absolute inset-0 flex flex-col items-center justify-center p-4 text-center select-none"
-            style={{
-              background:
-                "radial-gradient(100% 100% at 50% 20%, rgba(5,199,112,0.12), transparent 75%), #0c0c0c",
-            }}
-          >
-            <div className="flex flex-col items-center gap-2">
-              <motion.div
-                className={`w-9 h-9 rounded-full flex items-center justify-center text-[#05C770] transition-colors duration-200 ${
-                  isShockActive
-                    ? "bg-[#00EA8D]/30 border border-[#00EA8D] text-[#00FF99]"
-                    : "bg-[#05C770]/10 border border-[#05C770]/25"
-                }`}
-                animate={
-                  isShockActive
-                    ? {
-                        scale: [1, 1.25, 0.95, 1.2, 1],
-                        boxShadow: [
-                          "0 0 0px transparent",
-                          "0 0 25px #00EA8D, inset 0 0 10px #00EA8D",
-                          "0 0 35px #00FF99, inset 0 0 15px #00FF99",
-                          "0 0 0px transparent",
-                        ],
-                      }
-                    : undefined
-                }
-                transition={{ duration: 1.4 }}
-              >
-                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                </svg>
-              </motion.div>
-
-              <motion.span
-                className={`font-bold tracking-[0.2em] uppercase transition-colors duration-200 ${
-                  isShockActive ? "text-[#00FF99]" : "text-[#05C770]"
-                }`}
-                style={{ fontSize: "clamp(10px, 2.2vw, 12px)" }}
-                animate={
-                  isShockActive
-                    ? {
-                        opacity: [1, 0.2, 1, 0.3, 1, 0.7, 1],
-                        textShadow: [
-                          "0 0 0px transparent",
-                          "0 0 14px #00EA8D",
-                          "0 0 20px #00FF99",
-                          "0 0 0px transparent",
-                        ],
-                      }
-                    : undefined
-                }
-                transition={{ duration: 1.4 }}
-              >
-                Coming Soon
-              </motion.span>
-            </div>
-          </div>
-        ) : member.image ? (
-          <motion.div
-            className="absolute inset-0"
-            initial={member.isSecret ? { opacity: 0, scale: 1.15 } : false}
-            animate={member.isSecret ? { opacity: 1, scale: 1 } : false}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-          >
-            <Image
-              src={member.image}
-              alt={member.name}
-              fill
-              className="object-cover"
-              style={{ objectPosition: member.imagePosition || "center" }}
-              sizes="(max-width: 640px) 160px, 240px"
-            />
-          </motion.div>
+        {member.image ? (
+          <Image
+            src={member.image}
+            alt={member.name}
+            fill
+            className="object-cover"
+            style={{ objectPosition: member.imagePosition || "center" }}
+            sizes="(max-width: 640px) 160px, 240px"
+          />
         ) : (
           <div
             className="absolute inset-0 flex items-center justify-center"
@@ -491,42 +352,36 @@ function CrewCard({
         style={{ background: "#0f0f0f", height: 50 }}
       >
         <div className="min-w-0 flex-1">
-          {!isCurrentlySecret && (
-            <motion.p
-              initial={member.isSecret ? { opacity: 0, y: 5 } : false}
-              animate={member.isSecret ? { opacity: 1, y: 0 } : false}
-              className="font-bold leading-tight text-white truncate"
-              style={{ fontSize: "clamp(10px, 2.2vw, 13px)" }}
-            >
-              {member.name}
-            </motion.p>
-          )}
           <p
-            className={`truncate ${isCurrentlySecret ? "font-bold text-white text-center sm:text-left" : "mt-0.5 text-white/40"}`}
-            style={{ fontSize: isCurrentlySecret ? "clamp(10px, 2.2vw, 12px)" : "clamp(8px, 2vw, 11px)" }}
+            className="font-bold leading-tight text-white truncate"
+            style={{ fontSize: "clamp(10px, 2.2vw, 13px)" }}
+          >
+            {member.name}
+          </p>
+          <p
+            className="truncate mt-0.5 text-white/40"
+            style={{ fontSize: "clamp(8px, 2vw, 11px)" }}
             title={member.role}
           >
             {member.role}
           </p>
         </div>
-        {!isCurrentlySecret && (
-          <div className="flex gap-1.5 shrink-0">
-            <SocialLink
-              href={member.github}
-              label={`${member.name} GitHub`}
-              hoverClass="hover:text-white"
-            >
-              <GithubIcon />
-            </SocialLink>
-            <SocialLink
-              href={member.linkedin}
-              label={`${member.name} LinkedIn`}
-              hoverClass="hover:text-[#0A66C2]"
-            >
-              <LinkedinIcon />
-            </SocialLink>
-          </div>
-        )}
+        <div className="flex gap-1.5 shrink-0">
+          <SocialLink
+            href={member.github}
+            label={`${member.name} GitHub`}
+            hoverClass="hover:text-white"
+          >
+            <GithubIcon />
+          </SocialLink>
+          <SocialLink
+            href={member.linkedin}
+            label={`${member.name} LinkedIn`}
+            hoverClass="hover:text-[#0A66C2]"
+          >
+            <LinkedinIcon />
+          </SocialLink>
+        </div>
       </div>
     </motion.div>
   );
@@ -551,39 +406,13 @@ function GroupHeading({ children }: { children: React.ReactNode }) {
   );
 }
 
-function CrewRow({
-  title,
-  members,
-  presidentCardRef,
-  onPresidentTripleClick,
-  isShockActive = false,
-  isPresidentRevealed = false,
-}: {
-  title: string;
-  members: CrewMember[];
-  presidentCardRef?: React.RefObject<HTMLDivElement | null>;
-  onPresidentTripleClick?: () => void;
-  isShockActive?: boolean;
-  isPresidentRevealed?: boolean;
-}) {
-  const isPresidentRow = title === "President & Campus Ambassador";
-
+function CrewRow({ title, members }: { title: string; members: CrewMember[] }) {
   return (
     <motion.div className="relative w-full flex flex-col items-center mt-10 pointer-events-none" {...fadeUp}>
       <GroupHeading>{title}</GroupHeading>
       <div className="flex flex-wrap justify-center gap-3 md:gap-5 items-start">
         {members.map((member) => (
-          <CrewCard
-            key={member.name}
-            member={member}
-            width="clamp(150px, 38vw, 230px)"
-            cardRef={member.isSecret && isPresidentRow ? presidentCardRef : undefined}
-            onTripleClick={
-              member.isSecret && isPresidentRow ? onPresidentTripleClick : undefined
-            }
-            isShockActive={member.isSecret && isPresidentRow ? isShockActive : false}
-            isRevealed={member.isSecret && isPresidentRow ? isPresidentRevealed : false}
-          />
+          <CrewCard key={member.name} member={member} width="clamp(150px, 38vw, 230px)" />
         ))}
       </div>
     </motion.div>
@@ -614,33 +443,12 @@ function DomainRow({ title, groups }: { title: string; groups: DomainGroup[] }) 
 
 // ─── Section ───────────────────────────────────────────────────────────────────
 export default function MeetTheCrew() {
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const presidentCardRef = useRef<HTMLDivElement>(null);
-  const [isShockActive, setIsShockActive] = useState(false);
-  const [isPresidentRevealed, setIsPresidentRevealed] = useState(false);
-
-  const handlePresidentTripleClick = () => {
-    if (isPresidentRevealed || isShockActive) return;
-    setIsShockActive(true);
-    // Reveal President at the climax of the electric shock explosion (~750ms)
-    setTimeout(() => {
-      setIsPresidentRevealed(true);
-    }, 750);
-  };
-
   return (
     <section
-      ref={sectionRef}
       id="team"
       className="relative z-10 py-20 px-4 md:px-8 overflow-hidden pointer-events-none"
       style={{ background: "transparent" }}
     >
-      <ElectricShockEffect
-        active={isShockActive}
-        cardRef={presidentCardRef}
-        containerRef={sectionRef}
-        onComplete={() => setIsShockActive(false)}
-      />
       <div className="max-w-275 w-full mx-auto pointer-events-none">
         <motion.div
           className="relative z-10 text-center px-4"
@@ -658,14 +466,7 @@ export default function MeetTheCrew() {
         </motion.div>
 
         <CrewRow title="Founder" members={founder} />
-        <CrewRow
-          title="President & Campus Ambassador"
-          members={president}
-          presidentCardRef={presidentCardRef}
-          onPresidentTripleClick={handlePresidentTripleClick}
-          isShockActive={isShockActive}
-          isPresidentRevealed={isPresidentRevealed}
-        />
+        <CrewRow title="President & Campus Ambassador" members={president} />
         <CrewRow title="Vice Presidents" members={vicePresidents} />
         <CrewRow title="Secretary & Joint Secretary" members={secretaries} />
         <DomainRow title="Domain Heads" groups={domainHeads} />
