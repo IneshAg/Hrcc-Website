@@ -62,8 +62,8 @@ const president: CrewMember[] = [
     role: "President & Campus Ambassador",
     image: Jushiya,
     imagePosition: "center top",
-    github: TBD,
-    linkedin: TBD,
+    github: "https://github.com/jushiyagrover21-glitch",
+    linkedin: "https://www.linkedin.com/in/jushiya-grover-368738360/",
   },
 ];
 
