@@ -103,19 +103,24 @@ export default function HeroSection() {
 
 				{/* CTA Buttons */}
 				<motion.div
-					className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4 mt-2 mb-4 sm:mb-6 px-4 sm:px-0"
+					className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mt-6 mb-4 sm:mb-6 px-4 sm:px-0 w-full"
 					initial={{ opacity: 0, y: 16 }}
 					animate={{ opacity: 1, y: 0 }}
 					transition={{ delay: 0.7, duration: 0.6 }}
 				>
 					<a
-						href="#domains"
-						className="pointer-events-auto px-4 sm:px-7 py-2 sm:py-3 rounded-full font-semibold text-xs sm:text-sm tracking-wide transition-all duration-300 w-full sm:w-auto text-center"
-						style={{ background: "#fff", color: "#0a0a0a" }}
-						onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.background = "#05C770"; (e.currentTarget as HTMLAnchorElement).style.color = "#fff"; }}
-						onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.background = "#fff"; (e.currentTarget as HTMLAnchorElement).style.color = "#0a0a0a"; }}
+						href="#events"
+						className="pointer-events-auto px-6 sm:px-8 py-2.5 sm:py-3.5 rounded-full font-bold text-xs sm:text-sm tracking-wide transition-all duration-300 w-full sm:w-auto text-center shadow-lg shadow-[#05C770]/25 hover:shadow-xl hover:shadow-[#05C770]/40 hover:-translate-y-0.5"
+						style={{ background: "#05C770", color: "#000" }}
 					>
-						Explore
+						View Events
+					</a>
+					<a
+						href="#team"
+						className="pointer-events-auto px-6 sm:px-8 py-2.5 sm:py-3.5 rounded-full font-bold text-xs sm:text-sm tracking-wide transition-all duration-300 w-full sm:w-auto text-center border border-white/20 hover:border-white/50 hover:bg-white/5 hover:-translate-y-0.5"
+						style={{ background: "transparent", color: "#fff" }}
+					>
+						Meet the Crew
 					</a>
 				</motion.div>
 

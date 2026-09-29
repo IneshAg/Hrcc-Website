@@ -4,25 +4,19 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import Image, { StaticImageData } from "next/image";
 import Arnav from "@/assets/Arnav.png";
-import Ayush from "@/assets/Ayush.png";
-import Vishesh from "@/assets/Vishesh.jpeg";
-import Aryan from "@/assets/Aryan.jpeg";
-import Anish from "@/assets/Anish.png";
-import Aashi from "@/assets/Aashi.png";
-import Saii from "@/assets/Saii.png";
 import Purva from "@/assets/Purva.png";
-import Nischay from "@/assets/Nischay.png";
 import Ranvir from "@/assets/Ranvir.png";
 import Shlok from "@/assets/Shlok.jpeg";
-import Avinash from "@/assets/Avinash.jpeg";
-import ShanayaImage from "@/assets/Shanaya.jpeg";
 import Nikhil from "@/assets/Nikhil.jpeg";
-import Abhay from "@/assets/Abhay.jpeg";
-import Arya from "@/assets/Arya.jpeg";
 import Naisha from "@/assets/Naisha.jpeg";
-import Sumantha from "@/assets/Sumantha.jpeg";
 import Jushiya from "@/assets/Jushiya.jpeg";
-
+import Agambir from "@/assets/Agambir.png";
+import Shruti from "@/assets/Shruti.jpg";
+import Gowtham from "@/assets/Gowtham.jpeg";
+import Shourya from "@/assets/Shourya.png";
+import Adarsh from "@/assets/Adarsh.jpeg";
+import Abhay from "@/assets/Abhay.jpg";
+import Inesh from "@/assets/Inesh.png";
 /**
  * To finish a member: drop their photo in src/assets, import it and set `image`,
  * then replace the "#" placeholders with their real profile URLs. Anything left
@@ -70,43 +64,43 @@ const president: CrewMember[] = [
 
 const vicePresidents: CrewMember[] = [
   {
-    name: "Ayush Sharma",
+    name: "Purva Jain",
     role: "Vice President",
-    image: Ayush,
+    image: Purva,
     github: "https://github.com/itzayush18",
     linkedin: "https://www.linkedin.com/in/itsayush18/",
   },
   {
-    name: "Vishesh Jhabak",
+    name: "Shlok Agarwal",
     role: "Vice President",
-    image: Vishesh,
-    github: TBD,
-    linkedin: "https://www.linkedin.com/in/vishesh-jhabak-a7b000327",
-  },
-  {
-    name: "Aryan Gupta",
-    role: "Vice President",
-    image: Aryan,
+    image: Shlok,
     github: "https://github.com/Aryan27-max",
     linkedin: "https://www.linkedin.com/in/aryan-gupta-1058aa209/",
+  },
+  {
+    name: "Naisha Sharma",
+    role: "Vice President",
+    image: Naisha,
+    github: TBD,
+    linkedin: "https://www.linkedin.com/in/vishesh-jhabak-a7b000327",
   },
 ];
 
 const secretaries: CrewMember[] = [
   {
-    name: "Sumant Dash",
+    name: "Nikhil Nuguri",
     role: "Secretary",
-    image: Sumantha,
+    image: Nikhil,
     github: "https://github.com/sumantdash-ai",
     linkedin: "https://www.linkedin.com/in/sumant-dash-6377a8324?utm_source=share_via&utm_content=profile&utm_medium=member_ios",
   },
   {
-    name: "Purva Jain",
+    name: "Ranvir",
     role: "Joint Secretary",
-    image: Purva,
+    image: Ranvir,
     imagePosition: "center top",
-    github: "https://github.com/purvajain-git",
-    linkedin: "https://www.linkedin.com/in/purva-jain17",
+    github: TBD,
+    linkedin: TBD,
   },
 ];
 
@@ -115,18 +109,11 @@ const domainHeads: DomainGroup[] = [
     domain: "Technical",
     members: [
       {
-        name: "Anish Mall",
+        name: "Inesh Agarwal",
         role: "Technical Head",
-        image: Anish,
-        github: "https://github.com/anish-9387",
-        linkedin: "https://www.linkedin.com/in/anish-mall/",
-      },
-      {
-        name: "Shlok Agarwal",
-        role: "Technical Head",
-        image: Shlok,
-        github: "https://github.com/Shlok-2006",
-        linkedin: "https://www.linkedin.com/in/shlok0606/"
+        image: Inesh,
+        github: TBD,
+        linkedin: TBD,
       },
     ],
   },
@@ -134,19 +121,11 @@ const domainHeads: DomainGroup[] = [
     domain: "Creative",
     members: [
       {
-        name: "Sai",
+        name: "Abhay Singh",
         role: "Creative Head",
-        image: Saii,
-        github: TBD,
-        linkedin: "https://www.linkedin.com/in/sai-shraavya-badrinath-48aa48323",
-      },
-      {
-        name: "Nikhil",
-        role: "Creative Head",
-        image: Nikhil,
-        imagePosition: "center top",
-        github: "https://github.com/n4rnikhil",
-        linkedin: "https://www.linkedin.com/in/n4rnikhil/",
+        image: Abhay,
+        github: "https://github.com/abhaycore",
+        linkedin: "https://www.linkedin.com/in/abhay-singh-chouhan-2b52aa353?utm_source=share_via&utm_content=profile&utm_medium=member_android",
       },
     ],
   },
@@ -154,16 +133,9 @@ const domainHeads: DomainGroup[] = [
     domain: "Corporate",
     members: [
       {
-        name: "Ranvir Singh",
+        name: "Harshmeet",
         role: "Corporate Head",
-        image: Ranvir,
-        github: "https://github.com/rs7185-lab",
-        linkedin: "https://www.linkedin.com/in/ranvir-singh-268222383",
-      },
-      {
-        name: "Avinash K",
-        role: "Corporate Head",
-        image: Avinash,
+        image: undefined,
         github: TBD,
         linkedin: TBD,
       },
@@ -176,18 +148,18 @@ const domainLeads: DomainGroup[] = [
     domain: "Technical",
     members: [
       {
-        name: "Aashi Soni",
+        name: "Gowtham Raj",
         role: "Technical Lead",
-        image: Aashi,
-        github: "https://github.com/aashisoni000",
-        linkedin: "https://www.linkedin.com/in/aashisoni/",
+        image: Gowtham,
+        github: "https://github.com/RGowthamRaj" ,
+        linkedin: "https://www.linkedin.com/in/r-gowtham-raj-11871437b?utm_source=share_via&utm_content=profile&utm_medium=member_ios",
       },
       {
-        name: "Shanaya Ray",
+        name: "Shruti Dube",
         role: "Technical Lead",
-        image: ShanayaImage,
-        github: "https://github.com/shanayaray",
-        linkedin: "https://www.linkedin.com/in/shanaya-ray-5843443a6?utm_source=share_via&utm_content=profile&utm_medium=member_ios",
+        image: Shruti,
+        github: "https://github.com/shrutidube1408-netizen",
+        linkedin: "https://www.linkedin.com/in/shruti-dube-532963238/",
       },
     ],
   },
@@ -195,19 +167,18 @@ const domainLeads: DomainGroup[] = [
     domain: "Creative",
     members: [
       {
-        name: "Naisha Sharma",
+        name: "Shourya Parashar",
         role: "Creative Lead",
-        image: Naisha,
-        imagePosition: "center top",
-        github: TBD,
-        linkedin: TBD,
+        image: Shourya,
+        github: "https://github.com/im-shourya",
+        linkedin: "https://www.linkedin.com/in/im-shourya/",
       },
       {
-        name: "Abhay Singh Chouhan",
+        name: "Tanishq Verma",
         role: "Creative Lead",
-        image: Abhay,
-        github: "https://github.com/abhaycore",
-        linkedin: "https://www.linkedin.com/in/abhay-singh-chouhan-2b52aa353",
+        image: undefined,
+        github: TBD,
+        linkedin: TBD,
       },
     ],
   },
@@ -215,18 +186,18 @@ const domainLeads: DomainGroup[] = [
     domain: "Corporate",
     members: [
       {
-        name: "Arya Phanase",
+        name: "Agambir Singh",
         role: "Corporate Lead",
-        image: Arya,
-        github: TBD,
-        linkedin: TBD,
+        image: Agambir,
+        github: "https://github.com/SinghAgambir05/SinghAgambir05",
+        linkedin: "https://in.linkedin.com/in/agambir-singh-jammu-4204212b9",
       },
       {
-        name: "Nischay Naman",
+        name: "Adarsh Singh",
         role: "Corporate Lead",
-        image: Nischay,
-        github: "https://github.com/NischayNN",
-        linkedin: "https://www.linkedin.com/in/nischaynaman-303938379",
+        image: Adarsh,
+        github: "https://github.com/AdarshSingh-code",
+        linkedin: "https://www.linkedin.com/in/adarsh-singh-b40606270?utm_source=share_via&utm_content=profile&utm_medium=member_ios",
       },
     ],
   },
@@ -318,22 +289,22 @@ function CrewCard({ member, width }: { member: CrewMember; width: string }) {
         <span style={{ width: 8, height: 8, borderRadius: "50%", background: "#27C93F", display: "inline-block" }} />
       </div>
 
-      <div className="relative w-full" style={{ aspectRatio: "1 / 1" }}>
+      <div className="relative w-full overflow-hidden bg-[#0a0a0a]" style={{ aspectRatio: "3 / 4" }}>
         {member.image ? (
           <Image
             src={member.image}
             alt={member.name}
             fill
             className="object-cover"
-            style={{ objectPosition: member.imagePosition || "center" }}
+            style={{ objectPosition: member.imagePosition || "top" }}
             sizes="(max-width: 640px) 160px, 240px"
           />
         ) : (
           <div
-            className="absolute inset-0 flex items-center justify-center"
+            className="absolute inset-0 flex items-center justify-center relative z-10"
             style={{
               background:
-                "radial-gradient(80% 80% at 50% 0%, rgba(5,199,112,0.16), transparent 70%), #0b0b0b",
+                "radial-gradient(80% 80% at 50% 0%, rgba(5,199,112,0.16), transparent 70%), transparent",
             }}
           >
             <span
@@ -419,7 +390,7 @@ function CrewRow({ title, members }: { title: string; members: CrewMember[] }) {
   );
 }
 
-function DomainRow({ title, groups }: { title: string; groups: DomainGroup[] }) {
+function DomainRow({ title, groups, cardWidth = "clamp(135px, 33vw, 158px)" }: { title: string; groups: DomainGroup[]; cardWidth?: string }) {
   return (
     <motion.div className="w-full flex flex-col items-center mt-12 pointer-events-none" {...fadeUp}>
       <GroupHeading>{title}</GroupHeading>
@@ -431,7 +402,7 @@ function DomainRow({ title, groups }: { title: string; groups: DomainGroup[] }) 
             </span>
             <div className="flex flex-wrap justify-center gap-3 items-start">
               {group.members.map((member) => (
-                <CrewCard key={member.name} member={member} width="clamp(135px, 33vw, 158px)" />
+                <CrewCard key={member.name} member={member} width={cardWidth} />
               ))}
             </div>
           </div>
@@ -469,7 +440,7 @@ export default function MeetTheCrew() {
         <CrewRow title="President & Campus Ambassador" members={president} />
         <CrewRow title="Vice Presidents" members={vicePresidents} />
         <CrewRow title="Secretary & Joint Secretary" members={secretaries} />
-        <DomainRow title="Domain Heads" groups={domainHeads} />
+        <DomainRow title="Domain Heads" groups={domainHeads} cardWidth="clamp(150px, 38vw, 230px)" />
         <DomainRow title="Domain Leads" groups={domainLeads} />
       </div>
     </section>
