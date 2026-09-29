@@ -332,22 +332,15 @@ export default function UpcomingEvents() {
                   {/* Dot indicator */}
                   <div className="relative">
                     {event.live && (
-                      <div className="absolute inset-0 bg-[#05C770] rounded-md animate-ping opacity-75" />
+                      <div className="absolute inset-0 bg-[#05C770] rounded-full animate-ping opacity-75" />
                     )}
                     <div
-                      className="relative w-6 h-6 rounded-md border-2 transition-all duration-300"
+                      className="relative w-5 h-5 rounded-full border-2 transition-all duration-300"
                       style={{
                         borderColor: activeIndex === i ? "#05C770" : "rgba(255,255,255,0.25)",
-                        background: "transparent",
+                        background: activeIndex === i ? "#05C770" : "transparent",
                       }}
                     />
-                    {/* Inner dot for active state without making the whole box glow */}
-                    {activeIndex === i && (
-                       <motion.div 
-                         layoutId="activeTimelineDot"
-                         className="absolute inset-0 m-auto w-2 h-2 rounded-[2px] bg-[#05C770]" 
-                       />
-                    )}
                   </div>
                   {/* Label — wraps and shrinks on phones so six of them still fit */}
                   <span
