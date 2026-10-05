@@ -13,6 +13,8 @@ import DomainRevealCard from "./domains/DomainRevealCard";
 import TechnicalPanel from "./domains/TechnicalPanel";
 import CreativePanel from "./domains/CreativePanel";
 import CorporatePanel from "./domains/CorporatePanel";
+import { RevealSection, RevealItem } from "./RevealComponents";
+
 
 interface Domain {
   title: string;
@@ -72,21 +74,39 @@ export default function DomainsSection() {
       style={{ background: "transparent" }}
     >
       <div className="max-w-350 w-full pointer-events-none" ref={ref}>
+        {/* Section heading */}
+        <RevealSection className="mb-8">
+          <RevealItem>
+            <div className="flex flex-col gap-1.5">
+              <span className="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#05C770]">
+                What we do
+              </span>
+              <h2
+                className="font-black text-white leading-tight"
+                style={{ fontSize: "clamp(2rem, 5vw, 3.5rem)" }}
+              >
+                Our <span className="text-[#05C770]">Domains</span>
+              </h2>
+            </div>
+          </RevealItem>
+        </RevealSection>
+
         {/* Domain Cards — drag-to-reveal sliders */}
-        <div className="flex flex-col gap-3">
+        <RevealSection className="flex flex-col gap-3">
           {domains.map((domain, i) => (
-            <DomainRevealCard
-              key={domain.title}
-              index={i}
-              title={domain.title}
-              kicker={domain.kicker}
-              description={domain.description}
-              tags={domain.tags}
-              image={domain.image}
-              renderPanel={domain.renderPanel}
-            />
+            <RevealItem key={domain.title} delay={i * 80}>
+              <DomainRevealCard
+                index={i}
+                title={domain.title}
+                kicker={domain.kicker}
+                description={domain.description}
+                tags={domain.tags}
+                image={domain.image}
+                renderPanel={domain.renderPanel}
+              />
+            </RevealItem>
           ))}
-        </div>
+        </RevealSection>
 
         {/* Recruitments Block */}
         <motion.div
