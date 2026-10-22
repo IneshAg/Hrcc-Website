@@ -17,7 +17,7 @@ import CorporatePanel from "@/components/domains/CorporatePanel";
 import technicalBg from "@/assets/technical-bg.png";
 import creativeBg from "@/assets/creative-bg.png";
 import corporateBg from "@/assets/corporate-bg.png";
-import { RECRUITMENT_FORM_URL } from "@/lib/links";
+import { RECRUITMENT_FORM_URL, RECRUITMENT_OPEN } from "@/lib/links";
 
 type Domain = {
   title: string;
@@ -309,6 +309,7 @@ export default function DomainsSection() {
         </div>
 
         {/* Recruitments block */}
+        {RECRUITMENT_OPEN && (
         <motion.div
           className="mt-6 grid grid-cols-1 gap-3 md:grid-cols-2 lg:mt-0"
           initial={{ opacity: 0, y: 40 }}
@@ -402,6 +403,7 @@ export default function DomainsSection() {
             />
           </div>
         </motion.div>
+        )}
       </div>
     </section>
   );

@@ -71,7 +71,7 @@ export default function GalleryPage() {
         <Navbar />
         <RecruitmentBadge />
 
-        <section className="relative z-10 w-full px-4 pt-36 pb-24 md:px-6 md:pt-40">
+        <section className="relative z-10 w-full px-4 pt-24 pb-24 md:px-6 md:pt-28">
           <div className="mx-auto max-w-[1200px]">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -160,17 +160,7 @@ export default function GalleryPage() {
                       sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
                       className="object-cover transition-transform duration-500 group-hover:scale-110"
                     />
-                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/0 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-                    
-                    {photo.category === "dominion" && (
-                      <span className="pointer-events-none absolute top-2 right-2 rounded-md bg-[#05C770]/20 border border-[#05C770]/40 px-1.5 py-0.5 text-[9px] font-semibold text-[#05C770] backdrop-blur-md opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                        Dominion
-                      </span>
-                    )}
-
-                    <span className="pointer-events-none absolute bottom-2 left-2 right-2 truncate text-left text-[11px] font-semibold text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                      {photo.caption}
-                    </span>
+                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/40 via-black/0 to-black/0 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                   </motion.button>
                 ))}
               </AnimatePresence>
@@ -236,8 +226,7 @@ export default function GalleryPage() {
               </div>
 
               {/* Lightbox Footer Info */}
-              <div className="mt-3 flex items-center justify-between px-2 text-sm text-white/70">
-                <p className="font-medium text-white">{filteredPhotos[openIndex].caption}</p>
+              <div className="mt-3 flex items-center justify-center px-2 text-sm text-white/70">
                 <span className="font-mono text-xs text-white/50">
                   {openIndex + 1} / {filteredPhotos.length}
                 </span>
