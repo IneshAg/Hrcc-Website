@@ -1,8 +1,9 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import {
   motion,
+  AnimatePresence,
   useMotionValueEvent,
   useScroll,
   useTransform,
@@ -16,6 +17,8 @@ import techtalk from "@/assets/techtalk.jpeg";
 import aprilhackathon from "@/assets/techformers.jpeg";
 import infinityHacks from "@/assets/Infinity Hacks.jpeg";
 import dominion from "@/assets/Domainion.jpeg";
+import Link from "next/link";
+import { dominionImagesOnly } from "@/lib/dominionPhotos";
 
 interface EventItem {
   id: string;
@@ -144,10 +147,19 @@ const events: EventItem[] = [
             Build • Innovate • Dominate
           </span>
         </div>
+        <div className="mt-3 flex items-center justify-center lg:justify-start">
+          <Link
+            href="/gallery"
+            className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#05C770] hover:text-[#05C770]/80 transition-colors"
+          >
+            <span>Explore all Dominion event photos in Gallery</span>
+            <span>→</span>
+          </Link>
+        </div>
       </div>
     ),
-    images: [dominion],
-    portrait: true,
+    images: [dominion, ...dominionImagesOnly],
+    portrait: false,
     titleColor: "#E8706A",
     yearColor: "#4A90D9",
   },
@@ -158,6 +170,119 @@ const CARD_HEIGHT = "clamp(480px, 75vh, 650px)";
 const STACK_SLACK = 56;
 /** Cards behind the front one stop shrinking after this many steps. */
 const MAX_STACK_DEPTH = 3;
+
+function EventPhotoCarousel({
+  images,
+  id,
+  accentColor,
+}: {
+  images: StaticImageData[];
+  id: string;
+  accentColor: string;
+}) {
+  const [current, setCurrent] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+
+  useEffect(() => {
+    if (images.length <= 1 || isPaused) return;
+    const interval = setInterval(() => {
+      setCurrent((prev) => (prev + 1) % images.length);
+    }, 3500);
+    return () => clearInterval(interval);
+  }, [images.length, isPaused]);
+
+  if (!images || images.length === 0) {
+    return (
+      <div className="flex h-full w-full flex-col items-center justify-center gap-1.5 border-2 border-dashed border-white/15 bg-white/5 text-center">
+        <span className="text-[10px] font-bold uppercase tracking-[0.18em] text-white/35">
+          Poster
+        </span>
+        <span className="text-xs font-semibold text-white/50">Coming soon</span>
+      </div>
+    );
+  }
+
+  const prev = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setCurrent((curr) => (curr - 1 + images.length) % images.length);
+  };
+
+  const next = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setCurrent((curr) => (curr + 1) % images.length);
+  };
+
+  return (
+    <div
+      className="relative w-full h-full group select-none flex items-center justify-center bg-black/40"
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+    >
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={current}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.35 }}
+          className="relative w-full h-full"
+        >
+          <Image
+            src={images[current]}
+            alt={`${id} photo ${current + 1}`}
+            fill
+            className="object-contain"
+            sizes="(max-width: 1024px) 100vw, 480px"
+            priority={current === 0}
+          />
+        </motion.div>
+      </AnimatePresence>
+
+      {images.length > 1 && (
+        <>
+          <button
+            type="button"
+            onClick={prev}
+            aria-label="Previous photo"
+            className="absolute left-2 top-1/2 -translate-y-1/2 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-black/60 text-white border border-white/20 backdrop-blur-md transition-all opacity-80 hover:opacity-100 hover:scale-110 hover:bg-black/80"
+          >
+            ‹
+          </button>
+          <button
+            type="button"
+            onClick={next}
+            aria-label="Next photo"
+            className="absolute right-2 top-1/2 -translate-y-1/2 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-black/60 text-white border border-white/20 backdrop-blur-md transition-all opacity-80 hover:opacity-100 hover:scale-110 hover:bg-black/80"
+          >
+            ›
+          </button>
+          <div className="absolute top-2.5 right-2.5 z-10 px-2 py-0.5 rounded-full bg-black/75 border border-white/15 text-[11px] font-mono text-white/90 backdrop-blur-md">
+            {current + 1} / {images.length}
+          </div>
+          <div className="absolute bottom-2 left-1/2 -translate-x-1/2 z-10 flex items-center gap-1.5 px-2 py-1 rounded-full bg-black/60 backdrop-blur-md border border-white/10">
+            {images.slice(0, 7).map((_, i) => (
+              <button
+                key={i}
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setCurrent(i);
+                }}
+                className={`h-1.5 rounded-full transition-all ${
+                  current === i ? "w-4 bg-[#05C770]" : "w-1.5 bg-white/40 hover:bg-white/70"
+                }`}
+                aria-label={`Jump to photo ${i + 1}`}
+              />
+            ))}
+            {images.length > 7 && (
+              <span className="text-[9px] text-white/60 ml-0.5 font-mono">+{images.length - 7}</span>
+            )}
+          </div>
+        </>
+      )}
+    </div>
+  );
+}
 
 function EventCard({
   event,
@@ -201,25 +326,16 @@ function EventCard({
               instead of being cropped by the wide banner */}
           <div
             className={`relative w-full overflow-hidden rounded-xl lg:shadow-lg ${
-              event.portrait ? "h-52 sm:h-64 lg:h-[450px] lg:w-[320px]" : "h-40 sm:h-52 lg:h-[350px] lg:w-[500px]"
+              event.portrait
+                ? "h-52 sm:h-64 lg:h-[450px] lg:w-[320px]"
+                : "h-52 sm:h-64 lg:h-[400px] lg:w-[480px]"
             }`}
           >
-            {event.images[0] ? (
-              <Image
-                src={event.images[0]}
-                alt={`${event.id} photo`}
-                fill
-                className="object-contain"
-                sizes="(max-width: 1024px) 100vw, 320px"
-              />
-            ) : (
-              <div className="flex h-full w-full flex-col items-center justify-center gap-1.5 border-2 border-dashed border-white/15 bg-white/5 text-center">
-                <span className="text-[10px] font-bold uppercase tracking-[0.18em] text-white/35">
-                  Poster
-                </span>
-                <span className="text-xs font-semibold text-white/50">Coming soon</span>
-              </div>
-            )}
+            <EventPhotoCarousel
+              images={event.images}
+              id={event.id}
+              accentColor={event.titleColor}
+            />
           </div>
         </div>
 
@@ -332,10 +448,10 @@ export default function UpcomingEvents() {
                   {/* Dot indicator */}
                   <div className="relative">
                     {event.live && (
-                      <div className="absolute inset-0 bg-[#05C770] rounded-full animate-ping opacity-75" />
+                      <div className="absolute inset-0 bg-[#05C770] rounded-md animate-ping opacity-75" />
                     )}
                     <div
-                      className="relative w-5 h-5 rounded-full border-2 transition-all duration-300"
+                      className="relative w-6 h-6 rounded-md border-2 transition-all duration-300"
                       style={{
                         borderColor: activeIndex === i ? "#05C770" : "rgba(255,255,255,0.25)",
                         background: activeIndex === i ? "#05C770" : "transparent",
