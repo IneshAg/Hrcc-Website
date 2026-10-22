@@ -10,12 +10,7 @@ import Footer from "@/components/Footer";
 import RecruitmentBadge from "@/components/RecruitmentBadge";
 
 import clubStart from "@/assets/club_start.jpeg";
-import codathon from "@/assets/codathon.jpeg";
-import techtalk from "@/assets/techtalk.jpeg";
-import techformers from "@/assets/techformers.jpeg";
 import launchEvent from "@/assets/launchevent.jpeg";
-import infinityHacks from "@/assets/Infinity Hacks.jpeg";
-import dominion from "@/assets/Domainion.jpeg";
 import centreOfExcellence from "@/assets/centre-of-excellence.png";
 
 import { dominionPhotos, type GalleryPhoto } from "@/lib/dominionPhotos";
@@ -23,14 +18,9 @@ import { dominionPhotos, type GalleryPhoto } from "@/lib/dominionPhotos";
 type FilterCategory = "all" | "dominion" | "highlights";
 
 const ALL_PHOTOS: GalleryPhoto[] = [
-  { src: dominion, caption: "Dominion 2026 — Official Poster", category: "dominion" },
   ...dominionPhotos,
   { src: clubStart, caption: "Club Launch — Sept 2025", category: "highlights" },
-  { src: codathon, caption: "Overclocked Codeathon", category: "highlights" },
-  { src: techtalk, caption: "Tech Talk", category: "highlights" },
-  { src: techformers, caption: "Techformers 1.0", category: "highlights" },
   { src: launchEvent, caption: "Launch Event", category: "highlights" },
-  { src: infinityHacks, caption: "Infinity Hacks 2026", category: "highlights" },
   { src: centreOfExcellence, caption: "Centre of Excellence", category: "highlights" },
 ];
 
