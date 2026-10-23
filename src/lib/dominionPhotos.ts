@@ -1,5 +1,11 @@
 import type { StaticImageData } from "next/image";
 
+import dsc0121 from "@/assets/DSC_0121.jpg";
+import dsc0398 from "@/assets/DSC_0398.jpg";
+import dsc0410 from "@/assets/DSC_0410.jpg";
+import dsc0435 from "@/assets/DSC_0435.jpg";
+import dsc0447 from "@/assets/DSC_0447.jpg";
+import dsc0449 from "@/assets/DSC_0449.jpg";
 import dsc0467 from "@/assets/DSC_0467.jpg";
 import dsc0473 from "@/assets/DSC_0473.jpg";
 import dsc0505 from "@/assets/DSC_0505.jpg";
@@ -18,6 +24,8 @@ import dsc0596 from "@/assets/DSC_0596.jpg";
 import dsc0597 from "@/assets/DSC_0597.jpg";
 import dsc0613 from "@/assets/DSC_0613.jpg";
 import dsc0713 from "@/assets/DSC_0713.jpg";
+import dsc0734 from "@/assets/DSC_0734.jpg";
+import dsc0753 from "@/assets/DSC_0753.jpg";
 
 export type GalleryPhoto = {
   src: StaticImageData;
@@ -26,24 +34,32 @@ export type GalleryPhoto = {
 };
 
 export const dominionPhotos: GalleryPhoto[] = [
-  { src: dsc0467, caption: "Dominion 2026 — Opening & Welcome", category: "dominion" },
-  { src: dsc0473, caption: "Dominion 2026 — Hackers In Action", category: "dominion" },
-  { src: dsc0505, caption: "Dominion 2026 — Architecture & Brainstorming", category: "dominion" },
-  { src: dsc0507, caption: "Dominion 2026 — Team Collaboration", category: "dominion" },
-  { src: dsc0511, caption: "Dominion 2026 — Focused Building", category: "dominion" },
-  { src: dsc0532, caption: "Dominion 2026 — Late Night Sprints", category: "dominion" },
-  { src: dsc0534, caption: "Dominion 2026 — Mentorship & Code Review", category: "dominion" },
-  { src: dsc0536, caption: "Dominion 2026 — Deep Work Session", category: "dominion" },
-  { src: dsc0537, caption: "Dominion 2026 — Problem Solving", category: "dominion" },
-  { src: dsc0552, caption: "Dominion 2026 — Presentation Preparation", category: "dominion" },
-  { src: dsc0555, caption: "Dominion 2026 — Project Pitching", category: "dominion" },
-  { src: dsc0556, caption: "Dominion 2026 — Judging Round", category: "dominion" },
-  { src: dsc0558, caption: "Dominion 2026 — Live Demo Showcase", category: "dominion" },
-  { src: dsc0564, caption: "Dominion 2026 — Audience & Participants", category: "dominion" },
-  { src: dsc0596, caption: "Dominion 2026 — Celebrations & Awards", category: "dominion" },
-  { src: dsc0597, caption: "Dominion 2026 — Winners On Stage", category: "dominion" },
-  { src: dsc0613, caption: "Dominion 2026 — Team Spirit & Smiles", category: "dominion" },
-  { src: dsc0713, caption: "Dominion 2026 — The HRCC Crew", category: "dominion" },
+  { src: dsc0121, caption: "Dominion 2026", category: "dominion" },
+  { src: dsc0398, caption: "Dominion 2026", category: "dominion" },
+  { src: dsc0410, caption: "Dominion 2026", category: "dominion" },
+  { src: dsc0435, caption: "Dominion 2026", category: "dominion" },
+  { src: dsc0447, caption: "Dominion 2026", category: "dominion" },
+  { src: dsc0449, caption: "Dominion 2026", category: "dominion" },
+  { src: dsc0467, caption: "Dominion 2026", category: "dominion" },
+  { src: dsc0473, caption: "Dominion 2026", category: "dominion" },
+  { src: dsc0505, caption: "Dominion 2026", category: "dominion" },
+  { src: dsc0507, caption: "Dominion 2026", category: "dominion" },
+  { src: dsc0511, caption: "Dominion 2026", category: "dominion" },
+  { src: dsc0532, caption: "Dominion 2026", category: "dominion" },
+  { src: dsc0534, caption: "Dominion 2026", category: "dominion" },
+  { src: dsc0536, caption: "Dominion 2026", category: "dominion" },
+  { src: dsc0537, caption: "Dominion 2026", category: "dominion" },
+  { src: dsc0552, caption: "Dominion 2026", category: "dominion" },
+  { src: dsc0555, caption: "Dominion 2026", category: "dominion" },
+  { src: dsc0556, caption: "Dominion 2026", category: "dominion" },
+  { src: dsc0558, caption: "Dominion 2026", category: "dominion" },
+  { src: dsc0564, caption: "Dominion 2026", category: "dominion" },
+  { src: dsc0596, caption: "Dominion 2026", category: "dominion" },
+  { src: dsc0597, caption: "Dominion 2026", category: "dominion" },
+  { src: dsc0613, caption: "Dominion 2026", category: "dominion" },
+  { src: dsc0713, caption: "Dominion 2026", category: "dominion" },
+  { src: dsc0734, caption: "Dominion 2026", category: "dominion" },
+  { src: dsc0753, caption: "Dominion 2026", category: "dominion" },
 ];
 
 export const dominionImagesOnly: StaticImageData[] = dominionPhotos.map((p) => p.src);
