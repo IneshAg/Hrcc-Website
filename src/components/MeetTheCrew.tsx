@@ -95,12 +95,12 @@ const secretaries: CrewMember[] = [
     linkedin: "https://www.linkedin.com/in/n4rnikhil/",
   },
   {
-    name: "Ranvir",
+    name: "Ranvir Singh",
     role: "Joint Secretary",
     image: Ranvir,
     imagePosition: "center top",
-    github: TBD,
-    linkedin: TBD,
+    github: "https://github.com/rs7185-lab",
+    linkedin: "https://www.linkedin.com/in/ranvir-singh-268222383/",
   },
 ];
 
