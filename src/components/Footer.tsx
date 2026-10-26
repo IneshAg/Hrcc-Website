@@ -7,7 +7,7 @@ import nobglogo from '@/assets/nobglogo.png';
 
 const Footer = () => {
   return (
-    <footer className="bg-[#2a2a2a] text-white py-16 px-6 sm:px-8 lg:px-16 font-sans opacity-100 relative z-10">
+    <footer id="contact" className="bg-[#2a2a2a] text-white py-16 px-6 sm:px-8 lg:px-16 font-sans opacity-100 relative z-10">
       <div className="max-w-7xl mx-auto">
         
         {/* Top Section: DECRYPT THE SYSTEM */}

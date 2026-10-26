@@ -25,9 +25,7 @@ const CODE: Token[][] = [
     ['"@hrcc/core"', "string"],
     [";", "plain"],
   ],
-  [],
   [
-    ["export ", "keyword"],
     ["const ", "keyword"],
     ["technical", "fn"],
     [" = ", "plain"],
@@ -39,46 +37,19 @@ const CODE: Token[][] = [
     ["  stack: [", "plain"],
     ['"React"', "string"],
     [", ", "plain"],
-    ['"Node"', "string"],
-    [", ", "plain"],
-    ['"Python"', "string"],
-    ["],", "plain"],
-  ],
-  [
-    ["  focus: [", "plain"],
     ['"AI/ML"', "string"],
-    [", ", "plain"],
-    ['"Web"', "string"],
     [", ", "plain"],
     ['"Hardware"', "string"],
     ["],", "plain"],
   ],
-  [
-    ["  ship: ", "plain"],
-    ["async", "keyword"],
-    [" () => {", "plain"],
-  ],
-  [
-    ["    await ", "keyword"],
-    ["build", "fn"],
-    ["();", "plain"],
-  ],
-  [
-    ["    return ", "keyword"],
-    ['"deployed"', "string"],
-    [";", "plain"],
-  ],
-  [["  },", "plain"]],
   [["});", "plain"]],
-  [],
   [
-    ["await ", "keyword"],
     ["technical", "plain"],
     [".", "plain"],
     ["ship", "fn"],
-    ["();", "plain"],
+    ["(); ", "plain"],
+    ["// 40+ builders, one crew", "comment"],
   ],
-  [["// 40+ builders, one crew", "comment"]],
 ];
 
 // Each line costs one extra character so blank lines still take time to "type".

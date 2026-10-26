@@ -2,14 +2,17 @@
 
 import { motion, useReducedMotion } from "framer-motion";
 
-import { RECRUITMENT_FORM_URL } from "@/lib/links";
+import { RECRUITMENT_FORM_URL, RECRUITMENT_OPEN } from "@/lib/links";
 
 /**
  * Always-on-screen "we're recruiting" badge, pinned bottom-right.
  * Clicking it opens the recruitment application form.
+ * Controlled by `RECRUITMENT_OPEN` in src/lib/links.ts.
  */
 export default function RecruitmentBadge() {
   const reduceMotion = useReducedMotion();
+
+  if (!RECRUITMENT_OPEN) return null;
 
   return (
     <motion.div

@@ -8,6 +8,7 @@ import SmoothScroll from "@/components/SmoothScroll";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import DomainsSection from "@/components/DomainsSection";
+import DomainsFlipSection from "@/components/DomainsFlipSection";
 import CentreOfExcellence from "@/components/CentreOfExcellence";
 import MeetTheCrew from "@/components/MeetTheCrew";
 import UpcomingEvents from "@/components/UpcomingEvents";
@@ -50,6 +51,9 @@ export default function Home() {
 
           {/* Domains Section */}
           <DomainsSection />
+
+          {/* Domains Flip Section — experimental scroll animation */}
+          <DomainsFlipSection />
 
           {/* Centre of Excellence */}
           <CentreOfExcellence />

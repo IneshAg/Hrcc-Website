@@ -31,7 +31,7 @@ export default function CentreOfExcellence() {
           >
             GUIDED BY
             <br />
-            <span style={{ color: "#05C770" }}>CENTRE OF EXCELLENCE</span>
+            <span style={{ color: "#05C770" }}>CENTRE OF EXCELLENCE FOR AGENTIC TWINS</span>
           </h2>
         </motion.div>
 

@@ -1,8 +1,9 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import {
   motion,
+  AnimatePresence,
   useMotionValueEvent,
   useScroll,
   useTransform,
@@ -16,6 +17,8 @@ import techtalk from "@/assets/techtalk.jpeg";
 import aprilhackathon from "@/assets/techformers.jpeg";
 import infinityHacks from "@/assets/Infinity Hacks.jpeg";
 import dominion from "@/assets/Domainion.jpeg";
+import Link from "next/link";
+import { dominionImagesOnly } from "@/lib/dominionPhotos";
 
 interface EventItem {
   id: string;
@@ -75,7 +78,7 @@ const events: EventItem[] = [
     year: "2026",
     description: (
       <div className="flex flex-col gap-4 text-left">
-        <p className="text-gray-700">
+        <p className="text-gray-300">
           Step into <strong>Techformers 1.0</strong>, a 2-day hackathon organized by HackerRank Campus Crew SRMIST in collaboration with HackerRank! Whether you're a beginner or an experienced developer, this event is designed to challenge your skills, spark innovation, and build impactful solutions for real-world problems. Join us on 7th–8th April 2026 at SRMIST for 2 days of intense hands-on building, team collaboration, and a chance to win from a prize pool of ₹30,000. Registration is live - no matter your level, there's a problem waiting for you!
         </p>
         <div className="mt-2 flex flex-col sm:flex-row gap-4 items-center justify-center lg:justify-start">
@@ -93,44 +96,22 @@ const events: EventItem[] = [
     title: "Infinity\nHacks",
     label: "Infinity Hacks",
     year: "2026",
-    live: true,
     // Slightly tighter type on phones — this card carries the most copy.
     description: (
-      <div className="flex flex-col gap-2.5 text-left text-xs sm:gap-3 sm:text-sm md:text-base">
-        <p className="text-gray-700">
+      <div className="flex flex-col gap-2.5 text-left text-sm sm:gap-3 sm:text-base md:text-lg">
+        <p className="text-gray-300">
           <strong>HackerRank Infinity Hacks 2026</strong> brings developers, designers, AI
           enthusiasts, and problem-solvers from around the world together for two days of building,
           experimenting, and solving challenges that matter — online on{" "}
           <strong>15th–16th August 2026</strong>.
         </p>
-        <p className="text-gray-700">
+        <p className="text-gray-300">
           It pushes you past conventional projects into real-world problems across multiple domains,
           turning ambitious ideas into meaningful solutions. And the momentum has already begun — with{" "}
           <strong>2,000+ registrations</strong> within hours of launch.
         </p>
-        <p className="font-bold text-gray-900">Think bigger. Build smarter. Create impact.</p>
+        <p className="font-bold text-white">Think bigger. Build smarter. Create impact.</p>
         <div className="mt-0.5 flex justify-center lg:justify-start">
-          <a
-            href="https://hrcc-infinityhacks.vercel.app/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group/reg inline-flex items-center gap-2.5 rounded-xl bg-[#05C770] px-6 py-3 text-sm font-extrabold tracking-wide text-black shadow-lg shadow-[#05C770]/25 transition-all duration-300 hover:bg-[#04b264] hover:shadow-xl hover:shadow-[#05C770]/40 hover:scale-[1.04] active:scale-[0.98] sm:px-7 sm:py-3.5 sm:text-base"
-          >
-            Register Now
-            <svg
-              className="h-4 w-4 transition-transform duration-300 group-hover/reg:translate-x-1 sm:h-5 sm:w-5"
-              viewBox="0 0 24 24"
-              fill="none"
-            >
-              <path
-                d="M5 12h13M13 6l6 6-6 6"
-                stroke="currentColor"
-                strokeWidth="2.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </a>
         </div>
       </div>
     ),
@@ -144,64 +125,164 @@ const events: EventItem[] = [
     title: "Dominion\n2026",
     label: "Dominion",
     year: "2026",
-    live: true,
     description: (
-      <div className="flex flex-col gap-2.5 text-left text-xs sm:gap-3 sm:text-sm md:text-base">
-        <p className="font-semibold italic text-gray-900">
+      <div className="flex flex-col gap-2.5 text-left text-sm sm:gap-3 sm:text-base md:text-lg">
+        <p className="font-semibold italic text-white">
           Where ideas compete. Where builders take over.
         </p>
-        <p className="text-gray-700">
+        <p className="text-gray-300">
           Gear up for <strong>DOMINION 2026</strong>, a hybrid buildathon by HackerRank Campus Crew
           SRMIST × IEEE Computer Society.
         </p>
-        <p className="text-gray-700">
+        <p className="text-gray-300">
           On <strong>2nd–3rd September 2026</strong> it pairs an offline buildathon at SRMIST,
           Kattankulathur with an online track — turn your ideas into working solutions and compete
           for rewards and goodies.
         </p>
-        <p className="font-bold text-gray-900">
+        <p className="font-bold text-white">
           Bring the idea. Build the solution. Own the challenge.
         </p>
         <div className="mt-1 flex flex-wrap items-center justify-center gap-4 lg:justify-start">
-          <a
-            href="https://luma.com/rr8pcs58"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group/reg inline-flex items-center gap-2.5 rounded-xl bg-[#05C770] px-6 py-3 text-sm font-extrabold tracking-wide text-black shadow-lg shadow-[#05C770]/25 transition-all duration-300 hover:bg-[#04b264] hover:shadow-xl hover:shadow-[#05C770]/40 hover:scale-[1.04] active:scale-[0.98] sm:px-7 sm:py-3.5 sm:text-base"
-          >
-            Register Now
-            <svg
-              className="h-4 w-4 transition-transform duration-300 group-hover/reg:translate-x-1 sm:h-5 sm:w-5"
-              viewBox="0 0 24 24"
-              fill="none"
-            >
-              <path
-                d="M5 12h13M13 6l6 6-6 6"
-                stroke="currentColor"
-                strokeWidth="2.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </a>
-          <span className="text-[10px] font-bold uppercase tracking-[0.18em] text-black/45">
+          <span className="text-[10px] font-bold uppercase tracking-[0.18em] text-white/45">
             Build • Innovate • Dominate
           </span>
         </div>
+        <div className="mt-3 flex items-center justify-center lg:justify-start">
+          <Link
+            href="/gallery"
+            className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#05C770] hover:text-[#05C770]/80 transition-colors"
+          >
+            <span>Explore all Dominion event photos in Gallery</span>
+            <span>→</span>
+          </Link>
+        </div>
       </div>
     ),
-    images: [dominion],
-    portrait: true,
+    images: [dominion, ...dominionImagesOnly],
+    portrait: false,
     titleColor: "#E8706A",
     yearColor: "#4A90D9",
   },
 ];
 
-const CARD_HEIGHT = "clamp(400px, 64vh, 520px)";
+const CARD_HEIGHT = "clamp(480px, 75vh, 650px)";
 /** Head room above the stack so cards behind the front one stay visible. */
 const STACK_SLACK = 56;
 /** Cards behind the front one stop shrinking after this many steps. */
 const MAX_STACK_DEPTH = 3;
+
+function EventPhotoCarousel({
+  images,
+  id,
+  accentColor,
+}: {
+  images: StaticImageData[];
+  id: string;
+  accentColor: string;
+}) {
+  const [current, setCurrent] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+
+  useEffect(() => {
+    if (images.length <= 1 || isPaused) return;
+    const interval = setInterval(() => {
+      setCurrent((prev) => (prev + 1) % images.length);
+    }, 3500);
+    return () => clearInterval(interval);
+  }, [images.length, isPaused]);
+
+  if (!images || images.length === 0) {
+    return (
+      <div className="flex h-full w-full flex-col items-center justify-center gap-1.5 border-2 border-dashed border-white/15 bg-white/5 text-center">
+        <span className="text-[10px] font-bold uppercase tracking-[0.18em] text-white/35">
+          Poster
+        </span>
+        <span className="text-xs font-semibold text-white/50">Coming soon</span>
+      </div>
+    );
+  }
+
+  const prev = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setCurrent((curr) => (curr - 1 + images.length) % images.length);
+  };
+
+  const next = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setCurrent((curr) => (curr + 1) % images.length);
+  };
+
+  return (
+    <div
+      className="relative w-full h-full group select-none flex items-center justify-center bg-black/40"
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+    >
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={current}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.35 }}
+          className="relative w-full h-full"
+        >
+          <Image
+            src={images[current]}
+            alt={`${id} photo ${current + 1}`}
+            fill
+            className="object-contain"
+            sizes="(max-width: 1024px) 100vw, 480px"
+            priority={current === 0}
+          />
+        </motion.div>
+      </AnimatePresence>
+
+      {images.length > 1 && (
+        <>
+          <button
+            type="button"
+            onClick={prev}
+            aria-label="Previous photo"
+            className="absolute left-2 top-1/2 -translate-y-1/2 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-black/60 text-white border border-white/20 backdrop-blur-md transition-all opacity-80 hover:opacity-100 hover:scale-110 hover:bg-black/80"
+          >
+            ‹
+          </button>
+          <button
+            type="button"
+            onClick={next}
+            aria-label="Next photo"
+            className="absolute right-2 top-1/2 -translate-y-1/2 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-black/60 text-white border border-white/20 backdrop-blur-md transition-all opacity-80 hover:opacity-100 hover:scale-110 hover:bg-black/80"
+          >
+            ›
+          </button>
+          <div className="absolute top-2.5 right-2.5 z-10 px-2 py-0.5 rounded-full bg-black/75 border border-white/15 text-[11px] font-mono text-white/90 backdrop-blur-md">
+            {current + 1} / {images.length}
+          </div>
+          <div className="absolute bottom-2 left-1/2 -translate-x-1/2 z-10 flex items-center gap-1.5 px-2 py-1 rounded-full bg-black/60 backdrop-blur-md border border-white/10">
+            {images.slice(0, 7).map((_, i) => (
+              <button
+                key={i}
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setCurrent(i);
+                }}
+                className={`h-1.5 rounded-full transition-all ${
+                  current === i ? "w-4 bg-[#05C770]" : "w-1.5 bg-white/40 hover:bg-white/70"
+                }`}
+                aria-label={`Jump to photo ${i + 1}`}
+              />
+            ))}
+            {images.length > 7 && (
+              <span className="text-[9px] text-white/60 ml-0.5 font-mono">+{images.length - 7}</span>
+            )}
+          </div>
+        </>
+      )}
+    </div>
+  );
+}
 
 function EventCard({
   event,
@@ -231,41 +312,50 @@ function EventCard({
 
   return (
     <motion.div
-      className="absolute inset-0 bg-white rounded-2xl overflow-hidden shadow-2xl pointer-events-auto"
+      className="absolute inset-0 bg-[#111111] border border-white/10 rounded-2xl overflow-hidden shadow-2xl pointer-events-auto flex flex-col"
       style={{ y, scale, opacity, zIndex: index }}
     >
-      <div className="flex h-full flex-col lg:flex-row items-stretch justify-between gap-0">
+      <div 
+        className="h-2 w-full shrink-0" 
+        style={{ background: `linear-gradient(to right, ${event.titleColor}, ${event.yearColor})` }}
+      />
+      <div className="flex flex-1 flex-col lg:flex-row items-stretch justify-between gap-0 h-full">
         {/* Event photo — banner on mobile, right column on desktop */}
         <div className="order-1 lg:order-2 shrink-0 flex justify-center items-center px-5 pt-5 lg:p-12">
           {/* object-contain on small screens so event posters stay readable
               instead of being cropped by the wide banner */}
           <div
             className={`relative w-full overflow-hidden rounded-xl lg:shadow-lg ${
-              event.portrait ? "h-40 sm:h-44 lg:h-96 lg:w-72" : "h-28 sm:h-36 lg:h-60 lg:w-80"
+              event.portrait
+                ? "h-52 sm:h-64 lg:h-[450px] lg:w-[320px]"
+                : "h-52 sm:h-64 lg:h-[400px] lg:w-[480px]"
             }`}
           >
-            {event.images[0] ? (
-              <Image
-                src={event.images[0]}
-                alt={`${event.id} photo`}
-                fill
-                className="object-contain"
-                sizes="(max-width: 1024px) 100vw, 320px"
-              />
-            ) : (
-              <div className="flex h-full w-full flex-col items-center justify-center gap-1.5 border-2 border-dashed border-black/15 bg-black/4 text-center">
-                <span className="text-[10px] font-bold uppercase tracking-[0.18em] text-black/35">
-                  Poster
-                </span>
-                <span className="text-xs font-semibold text-black/50">Coming soon</span>
-              </div>
-            )}
+            <EventPhotoCarousel
+              images={event.images}
+              id={event.id}
+              accentColor={event.titleColor}
+            />
           </div>
         </div>
 
         {/* Event description */}
-        <div className="order-2 lg:order-1 flex-1 min-h-0 overflow-hidden px-5 pb-5 pt-4 lg:p-12 flex flex-col justify-center lg:items-start items-center text-center lg:text-left">
-          <div className="text-gray-700 text-[13px] sm:text-sm md:text-base leading-relaxed max-w-lg w-full">
+        <div className="order-2 lg:order-1 flex-1 min-h-0 overflow-y-auto px-5 pb-5 pt-4 lg:p-12 flex flex-col justify-start lg:items-start items-center text-center lg:text-left">
+          <div className="mb-4 flex flex-col lg:items-start items-center gap-2">
+            <h3 
+              className="font-black leading-none whitespace-pre-line"
+              style={{ fontSize: "clamp(1.75rem, 4vw, 3rem)", color: event.titleColor }}
+            >
+              {event.title}
+            </h3>
+            <span 
+              className="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider"
+              style={{ backgroundColor: event.yearColor, color: "white" }}
+            >
+              {event.year}
+            </span>
+          </div>
+          <div className="text-gray-300 text-sm sm:text-base md:text-lg leading-relaxed max-w-xl w-full">
             {event.description}
           </div>
         </div>

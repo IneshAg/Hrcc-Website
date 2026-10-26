@@ -1,0 +1,17 @@
+declare module "*.JPG" {
+  import type { StaticImageData } from "next/image";
+  const content: StaticImageData;
+  export default content;
+}
+
+declare module "*.JPEG" {
+  import type { StaticImageData } from "next/image";
+  const content: StaticImageData;
+  export default content;
+}
+
+declare module "*.PNG" {
+  import type { StaticImageData } from "next/image";
+  const content: StaticImageData;
+  export default content;
+}

@@ -3,6 +3,8 @@
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import logo from "@/assets/nobglogo.png";
 
 const navLinks = [
@@ -11,6 +13,7 @@ const navLinks = [
   { label: "Team", href: "#team" },
   { label: "Events", href: "#events" },
   { label: "Work", href: "#our-work" },
+  { label: "Gallery", href: "/gallery" },
 ];
 
 export default function Navbar() {
@@ -19,6 +22,8 @@ export default function Navbar() {
   const [hovered, setHovered] = useState<string | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const lastY = useRef(0);
+  const pathname = usePathname();
+  const isHome = pathname === "/";
 
   useEffect(() => {
     const onScroll = () => {
@@ -26,7 +31,11 @@ export default function Navbar() {
       setVisible(currentY < lastY.current || currentY < 60);
       lastY.current = currentY;
 
-      const ids = navLinks.map((l) => l.href.replace("#", ""));
+      if (!isHome) return;
+
+      const ids = navLinks
+        .filter((l) => l.href.startsWith("#"))
+        .map((l) => l.href.replace("#", ""));
       for (let i = ids.length - 1; i >= 0; i--) {
         const el = document.getElementById(ids[i]);
         if (el && el.getBoundingClientRect().top <= 120) {
@@ -37,7 +46,7 @@ export default function Navbar() {
     };
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [isHome]);
 
   return (
     <>
@@ -59,26 +68,52 @@ export default function Navbar() {
           }}
         >
           {/* Brand Left */}
-          <a href="#home" className="flex items-center gap-3 pl-2 group">
+          <Link href={isHome ? "#home" : "/"} className="flex items-center gap-3 pl-2 group">
             <div className="w-8 h-8 rounded-lg bg-black border border-white/20 flex items-center justify-center p-1 shrink-0 group-hover:border-[#05C770] transition-colors">
               <Image src={logo} alt="HRCC Logo" width={22} height={22} className="object-contain" />
             </div>
             <span className="font-extrabold text-white text-base tracking-wider group-hover:text-[#05C770] transition-colors">
               HRCC
             </span>
-          </a>
+          </Link>
 
           {/* Center Links */}
           <div className="flex items-center gap-1">
             {navLinks.map((link) => {
-              const id = link.href.replace("#", "");
-              const isActive = active === id;
+              const destination = isHome || link.href.startsWith("/") ? link.href : `/${link.href}`;
+              const isRoute = destination.startsWith("/");
+              const id = link.href.startsWith("/") ? link.href : link.href.replace("#", "");
+              const isActive = link.href.startsWith("/") ? false : active === id;
               const isHovered = hovered === id;
 
               let bg = "transparent";
               let color = "rgba(255,255,255,0.55)";
               if (isActive) { bg = "rgba(255,255,255,0.97)"; color = "#0a0a12"; }
               else if (isHovered) { bg = "rgba(255,255,255,0.10)"; color = "#fff"; }
+
+              const linkStyle = {
+                background: bg,
+                color,
+                fontWeight: isActive ? 600 : 400,
+                boxShadow: isActive ? "0 1px 12px rgba(255,255,255,0.10)" : "none",
+              } as const;
+              const linkClassName =
+                "inline-flex items-center px-4 py-2 rounded-full text-[13px] tracking-wide transition-all duration-200";
+
+              if (isRoute) {
+                return (
+                  <Link
+                    key={id}
+                    href={destination}
+                    onMouseEnter={() => setHovered(id)}
+                    onMouseLeave={() => setHovered(null)}
+                    className={linkClassName}
+                    style={linkStyle}
+                  >
+                    {link.label}
+                  </Link>
+                );
+              }
 
               return (
                 <a
@@ -87,13 +122,8 @@ export default function Navbar() {
                   onClick={() => setActive(id)}
                   onMouseEnter={() => setHovered(id)}
                   onMouseLeave={() => setHovered(null)}
-                  className="inline-flex items-center px-4 py-2 rounded-full text-[13px] tracking-wide transition-all duration-200"
-                  style={{
-                    background: bg,
-                    color,
-                    fontWeight: isActive ? 600 : 400,
-                    boxShadow: isActive ? "0 1px 12px rgba(255,255,255,0.10)" : "none",
-                  }}
+                  className={linkClassName}
+                  style={linkStyle}
                 >
                   {link.label}
                 </a>
@@ -104,7 +134,9 @@ export default function Navbar() {
           {/* Right CTA */}
           <div className="pr-1">
             <a
-              href="mailto:hrccsrm@gmail.com"
+              href="https://mail.google.com/mail/?view=cm&fs=1&to=hrccsrm@gmail.com"
+              target="_blank"
+              rel="noopener noreferrer"
               onMouseEnter={() => setHovered("contact")}
               onMouseLeave={() => setHovered(null)}
               className="inline-flex items-center px-5 py-2 rounded-full text-[13px] font-semibold tracking-wide transition-all duration-200"
@@ -142,14 +174,14 @@ export default function Navbar() {
           }}
         >
           {/* Brand Left */}
-          <a href="#home" className="flex items-center gap-2.5">
+          <Link href={isHome ? "#home" : "/"} className="flex items-center gap-2.5">
             <div className="w-8 h-8 rounded-lg bg-black border border-white/20 flex items-center justify-center p-1 shrink-0">
               <Image src={logo} alt="HRCC Logo" width={20} height={20} className="object-contain" />
             </div>
             <span className="font-extrabold text-white text-base tracking-wider">
               HRCC
             </span>
-          </a>
+          </Link>
 
           {/* Mobile Menu Button */}
           <button
@@ -181,8 +213,30 @@ export default function Navbar() {
           >
             <div className="p-2">
               {navLinks.map((link) => {
-                const id = link.href.replace("#", "");
-                const isActive = active === id;
+                const destination = isHome || link.href.startsWith("/") ? link.href : `/${link.href}`;
+                const isRoute = destination.startsWith("/");
+                const id = link.href.startsWith("/") ? link.href : link.href.replace("#", "");
+                const isActive = link.href.startsWith("/") ? false : active === id;
+
+                const itemStyle = {
+                  background: isActive ? "rgba(255,255,255,0.15)" : "transparent",
+                  fontWeight: isActive ? 500 : 400,
+                } as const;
+                const itemClassName = "block px-4 py-3 rounded-xl text-white transition-all duration-200";
+
+                if (isRoute) {
+                  return (
+                    <Link
+                      key={id}
+                      href={destination}
+                      onClick={() => setMobileMenuOpen(false)}
+                      className={itemClassName}
+                      style={itemStyle}
+                    >
+                      {link.label}
+                    </Link>
+                  );
+                }
 
                 return (
                   <a
@@ -192,11 +246,8 @@ export default function Navbar() {
                       setActive(id);
                       setMobileMenuOpen(false);
                     }}
-                    className="block px-4 py-3 rounded-xl text-white transition-all duration-200"
-                    style={{
-                      background: isActive ? "rgba(255,255,255,0.15)" : "transparent",
-                      fontWeight: isActive ? 500 : 400,
-                    }}
+                    className={itemClassName}
+                    style={itemStyle}
                   >
                     {link.label}
                   </a>
@@ -205,7 +256,9 @@ export default function Navbar() {
               
               {/* Mobile CTA */}
               <a
-                href="mailto:hrccsrm@gmail.com"
+                href="https://mail.google.com/mail/?view=cm&fs=1&to=hrccsrm@gmail.com"
+                target="_blank"
+                rel="noopener noreferrer"
                 onClick={() => setMobileMenuOpen(false)}
                 className="block w-full px-4 py-3 rounded-xl text-center font-semibold transition-all duration-200 mt-2"
                 style={{

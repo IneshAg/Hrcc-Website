@@ -16,61 +16,61 @@ export default function Preloader({ onComplete }: { onComplete: () => void }) {
       // ── Phase 1: Logo ──────────────────────────────────────
       // H slides in from TOP, green rect slides in from BOTTOM
       await Promise.all([
-        animate(".logo-h", { y: "0%" }, { duration: 1.05, ease: [0.22, 1, 0.36, 1] }),
-        animate(".logo-rect", { y: "0%" }, { duration: 1.05, ease: [0.22, 1, 0.36, 1] }),
+        animate(".logo-h", { y: "0%" }, { duration: 0.55, ease: [0.22, 1, 0.36, 1] }),
+        animate(".logo-rect", { y: "0%" }, { duration: 0.55, ease: [0.22, 1, 0.36, 1] }),
       ]);
 
       // Hold logo
-      await new Promise((r) => setTimeout(r, 780));
+      await new Promise((r) => setTimeout(r, 400));
 
       // ── Phase 2: Crossfade logo → setup (only text visible, no monitor chrome yet) ──
-      const logoOut = animate(".logo-wrapper", { opacity: 0, scale: 0.9 }, { duration: 0.5, ease: "easeIn" });
-      const setupIn = animate(".setup-wrapper", { opacity: 1 }, { duration: 0.55, ease: "easeOut" });
+      const logoOut = animate(".logo-wrapper", { opacity: 0, scale: 0.9 }, { duration: 0.28, ease: "easeIn" });
+      const setupIn = animate(".setup-wrapper", { opacity: 1 }, { duration: 0.36, ease: "easeOut" });
       await Promise.all([logoOut, setupIn]);
 
       // ── Phase 3: Type "HackerRank" ────────────────────────
-      await animate(".cursor1", { opacity: 1 }, { duration: 0.15 });
+      await animate(".cursor1", { opacity: 1 }, { duration: 0.05 });
       if (line1Ref.current) {
         await animate(
           line1Ref.current,
           { width: line1Ref.current.scrollWidth },
-          { duration: 1.25, ease: "linear" }
+          { duration: 0.55, ease: "linear" }
         );
       }
 
       // ── Phase 4: Type "CampusCrew" ────────────────────────
-      await animate(".cursor1", { opacity: 0 }, { duration: 0.12 });
-      await new Promise((r) => setTimeout(r, 60));
-      await animate(".cursor2", { opacity: 1 }, { duration: 0.12 });
+      await animate(".cursor1", { opacity: 0 }, { duration: 0.05 });
+      await new Promise((r) => setTimeout(r, 20));
+      await animate(".cursor2", { opacity: 1 }, { duration: 0.05 });
       if (line2Ref.current) {
         await animate(
           line2Ref.current,
           { width: line2Ref.current.scrollWidth },
-          { duration: 1.25, ease: "linear" }
+          { duration: 0.55, ease: "linear" }
         );
       }
 
       // Breathe
-      await new Promise((r) => setTimeout(r, 720));
-      await animate(".cursor2", { opacity: 0 }, { duration: 0.2 });
+      await new Promise((r) => setTimeout(r, 500));
+      await animate(".cursor2", { opacity: 0 }, { duration: 0.05 });
 
       // ── Phase 5: Reveal monitor chrome + keyboard, then zoom out ──
       // Fade in monitor frame, stand, and peripherals simultaneously with zoom out
       await Promise.all([
-        animate(".screen-outline", { pathLength: 1, opacity: 1 }, { duration: 0.6, ease: "easeOut" }),
-        animate(".stand-base", { opacity: 1 }, { duration: 0.6, ease: "easeOut" }),
-        animate(".peripherals", { opacity: 1 }, { duration: 0.6, ease: "easeOut" }),
-        animate(".setup-wrapper", { scale: 0.7 }, { duration: 0.8, ease: [0.22, 1, 0.36, 1] }),
+        animate(".screen-outline", { pathLength: 1, opacity: 1 }, { duration: 0.4, ease: "easeOut" }),
+        animate(".stand-base", { opacity: 1 }, { duration: 0.4, ease: "easeOut" }),
+        animate(".peripherals", { opacity: 1 }, { duration: 0.4, ease: "easeOut" }),
+        animate(".setup-wrapper", { scale: 0.7 }, { duration: 0.5, ease: [0.22, 1, 0.36, 1] }),
       ]);
 
       // Hold to admire the setup
-      await new Promise((r) => setTimeout(r, 600));
+      await new Promise((r) => setTimeout(r, 400));
 
       // ── Exit: cinematic green wipe from the rectangle ─────
       await animate(
         ".transition-box",
         { scale: 300, backgroundColor: "#05C770" },
-        { duration: 1.4, ease: [0.76, 0, 0.24, 1] }
+        { duration: 0.7, ease: [0.76, 0, 0.24, 1] }
       );
       onComplete();
     };
