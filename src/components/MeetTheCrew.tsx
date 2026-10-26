@@ -67,8 +67,8 @@ const vicePresidents: CrewMember[] = [
     name: "Purva Jain",
     role: "Vice President",
     image: Purva,
-    github: "https://github.com/itzayush18",
-    linkedin: "https://www.linkedin.com/in/itsayush18/",
+    github: "https://github.com/purvajain-git",
+    linkedin: "https://www.linkedin.com/in/purva-jain17",
   },
   {
     name: "Agambir Singh",
@@ -82,7 +82,7 @@ const vicePresidents: CrewMember[] = [
     role: "Vice President",
     image: Naisha,
     github: TBD,
-    linkedin: "https://www.linkedin.com/in/vishesh-jhabak-a7b000327",
+    linkedin: TBD,
   },
 ];
 
@@ -91,8 +91,8 @@ const secretaries: CrewMember[] = [
     name: "Nikhil Nuguri",
     role: "Secretary",
     image: Nikhil,
-    github: "https://github.com/sumantdash-ai",
-    linkedin: "https://www.linkedin.com/in/sumant-dash-6377a8324?utm_source=share_via&utm_content=profile&utm_medium=member_ios",
+    github: "https://github.com/n4rnikhil",
+    linkedin: "https://www.linkedin.com/in/n4rnikhil/",
   },
   {
     name: "Ranvir",
