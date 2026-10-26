@@ -73,26 +73,24 @@ function FlipCard({
   const rotateZ = useTransform(
     progress,
     [flipStart, flipEnd],
-    index === 0 ? [0, -6] : index === 2 ? [0, 6] : [0, 0]
+    index === 0 ? [0, -5] : index === 2 ? [0, 5] : [0, 0]
   );
   const translateY = useTransform(
     progress,
     [flipStart, flipEnd],
-    index === 1 ? [0, 0] : [0, 18]
+    index === 1 ? [0, 0] : [0, 10]
   );
 
-  // Grow the whole card a bit once flipped — the original Domains section's
-  // cards visibly expand when opened; this echoes that instead of just
-  // rotating in place at a fixed, cramped size.
-  const cardScale = useTransform(progress, [flipStart, flipEnd], [1, 1.16]);
+  // Subtle lift on flip without pushing cards outside the viewport
+  const cardScale = useTransform(progress, [flipStart, flipEnd], [1, 1.02]);
 
   return (
     <motion.div
       className="relative shrink-0 [perspective:1200px]"
       style={{
-        // 5:7 card ratio, responsive
-        width: "clamp(160px, 22vw, 320px)",
-        height: "clamp(224px, 30.8vw, 448px)",
+        // Full responsive card dimensions matching OG domains card scale
+        width: "clamp(260px, 25vw, 360px)",
+        height: "clamp(480px, 58vh, 580px)",
         scale: cardScale,
       }}
     >
@@ -101,11 +99,7 @@ function FlipCard({
         className="absolute inset-0 [transform-style:preserve-3d]"
         style={{ rotateY, rotateZ, y: translateY }}
       >
-        {/* ── FRONT — one shared image, cropped to this card's third ──
-            backface-visibility must live on an element with NO overflow/border-radius
-            of its own — Chrome silently ignores backface-visibility on a rotated node
-            that also clips its own overflow, which is what let the back face show
-            through immediately instead of staying hidden until the flip. */}
+        {/* ── FRONT — one shared image, cropped to this card's third ── */}
         <div className="absolute inset-0 [backface-visibility:hidden]">
           <div className="absolute inset-0 overflow-hidden rounded-2xl">
             <div
@@ -124,9 +118,9 @@ function FlipCard({
         {/* ── BACK — styled to match the original Domains section's open card ── */}
         <div className="absolute inset-0 [backface-visibility:hidden] [transform:rotateY(180deg)]">
           <div className="absolute inset-0 overflow-hidden rounded-2xl border border-white/10 bg-[#080808] shadow-[0_30px_60px_-25px_rgba(0,0,0,0.85)]">
-            <div className="flex h-full flex-col overflow-hidden p-4 sm:p-5">
-              {/* Header row — index + divider + kicker, same as the original card */}
-              <div className="mb-2.5 flex shrink-0 items-center gap-2 sm:mb-3">
+            <div className="flex h-full flex-col overflow-hidden p-3.5 sm:p-4.5">
+              {/* Header row — index + divider + kicker */}
+              <div className="mb-1.5 flex shrink-0 items-center gap-2 sm:mb-2">
                 <span className="font-mono text-[10px] tracking-widest text-[#05C770]">
                   {card.number}
                 </span>
@@ -136,14 +130,14 @@ function FlipCard({
                 </span>
               </div>
 
-              <h3 className="mb-1.5 font-black text-lg leading-none tracking-tight text-white sm:mb-2 sm:text-xl">
+              <h3 className="mb-1 shrink-0 font-black text-lg leading-none tracking-tight text-white sm:text-xl">
                 {card.label}
               </h3>
-              <p className="mb-2.5 text-[10.5px] leading-relaxed text-white/55 sm:mb-3 sm:text-[11px]">
+              <p className="mb-2 shrink-0 text-[10px] leading-relaxed text-white/55 sm:text-[11px]">
                 {card.desc}
               </p>
 
-              <div className="mb-2.5 flex shrink-0 flex-wrap gap-1.5 sm:mb-3">
+              <div className="mb-2 flex shrink-0 flex-wrap gap-1.5">
                 {card.tags.map((t) => (
                   <span
                     key={t}
@@ -154,7 +148,7 @@ function FlipCard({
                 ))}
               </div>
 
-              <div className="mb-2.5 min-h-0 flex-1 overflow-hidden rounded-xl border border-white/8 bg-black/40 sm:mb-3">
+              <div className="mb-2.5 min-h-0 flex-1 overflow-hidden rounded-xl border border-white/8 bg-black/40">
                 {card.renderPanel(true)}
               </div>
 
@@ -195,15 +189,15 @@ export default function DomainsFlipSection() {
   const headingY = useTransform(progress, [0.08, 0.28], ["40px", "0px"]);
   const headingOpacity = useTransform(progress, [0.08, 0.28], [0, 1]);
 
-  // ── Phase 2 (0.35→0.6): container widens (gap is CSS on the flex container) ──
+  // ── Phase 2 (0.35→0.6): container widens with ample room for full-sized cards ──
   const containerWidth = useTransform(
     progress,
     [0, 0.35, 0.6],
-    ["clamp(160px,22vw,320px)", "clamp(160px,22vw,320px)", "min(92vw,980px)"]
+    ["clamp(240px,22vw,320px)", "clamp(240px,22vw,320px)", "min(96vw,1160px)"]
   );
 
-  // gap between cards: 0 → 28px as cards split
-  const cardGap = useTransform(progress, [0.3, 0.6], [0, 28]);
+  // gap between cards: 0 → 24px as cards split
+  const cardGap = useTransform(progress, [0.3, 0.6], [0, 24]);
 
   // Border radius: tight rectangular → rounder card corners
   const borderRadius = useTransform(progress, [0.3, 0.58], [8, 20]);
@@ -220,10 +214,10 @@ export default function DomainsFlipSection() {
 
           {/* Heading */}
           <motion.div
-            className="relative z-10 mb-8 text-center"
+            className="relative z-10 mb-4 sm:mb-6 text-center"
             style={{ y: headingY, opacity: headingOpacity }}
           >
-            <div className="mb-2 flex items-center justify-center gap-2">
+            <div className="mb-1.5 flex items-center justify-center gap-2">
               <span className="h-1.5 w-1.5 rounded-full bg-[#05C770]" />
               <span className="font-mono text-[10px] uppercase tracking-[0.28em] text-[#05C770]">
                 Our Domains
@@ -231,11 +225,11 @@ export default function DomainsFlipSection() {
             </div>
             <h2
               className="font-black uppercase tracking-tight text-white"
-              style={{ fontSize: "clamp(1.8rem, 4vw, 3.2rem)" }}
+              style={{ fontSize: "clamp(1.6rem, 3.2vw, 2.6rem)", lineHeight: 1.1 }}
             >
               HackerRank Campus Crew
             </h2>
-            <p className="mx-auto mt-2 max-w-lg text-sm text-white/40">
+            <p className="mx-auto mt-1 max-w-lg text-xs sm:text-sm text-white/40">
               Three teams. One mission. Scroll to explore each domain.
             </p>
           </motion.div>

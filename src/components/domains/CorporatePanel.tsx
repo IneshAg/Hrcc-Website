@@ -35,13 +35,13 @@ function Stat({ label, value, suffix, active, index }: (typeof STATS)[number] & 
   const count = useCountUp(value, active, index * 0.12);
 
   return (
-    <div className="flex-1 rounded-lg border border-white/8 bg-white/3 px-3 py-2.5">
-      <div className="font-black leading-none text-white" style={{ fontSize: "clamp(15px, 1.7vw, 24px)" }}>
+    <div className="flex-1 rounded-lg border border-white/8 bg-white/3 px-2 py-1.5 sm:px-2.5 sm:py-2">
+      <div className="font-black leading-none text-white" style={{ fontSize: "clamp(13px, 1.4vw, 20px)" }}>
         {count}
         <span className="text-[#05C770]">{suffix}</span>
       </div>
       <div
-        className="mt-1 text-[9px] uppercase tracking-[0.18em] text-white/35"
+        className="mt-1 text-[8.5px] uppercase tracking-[0.16em] text-white/35 sm:text-[9px]"
         style={{ fontFamily: MONO }}
       >
         {label}
@@ -79,24 +79,24 @@ export default function CorporatePanel({ active }: { active: boolean }) {
         </span>
       </div>
 
-      <div className="flex min-h-0 flex-1 flex-col gap-3 p-3">
+      <div className="flex min-h-0 flex-1 flex-col gap-2 p-2 sm:gap-2.5 sm:p-2.5">
         {/* Stat tiles */}
-        <div className="flex shrink-0 gap-2">
+        <div className="flex shrink-0 gap-1.5 sm:gap-2">
           {STATS.map((stat, i) => (
             <Stat key={stat.label} {...stat} active={active} index={i} />
           ))}
         </div>
 
         {/* Growth chart */}
-        <div className="relative flex min-h-0 flex-1 flex-col rounded-lg border border-white/8 bg-white/3 p-3">
+        <div className="relative flex min-h-0 flex-1 flex-col rounded-lg border border-white/8 bg-white/3 p-2 sm:p-2.5">
           <div className="flex shrink-0 items-center justify-between">
             <span
-              className="text-[9px] uppercase tracking-[0.2em] text-white/30"
+              className="text-[8.5px] uppercase tracking-[0.18em] text-white/30 sm:text-[9px]"
               style={{ fontFamily: MONO }}
             >
               Sponsorships
             </span>
-            <span className="flex items-center gap-1 text-[10px] font-semibold text-[#05C770]">
+            <span className="flex items-center gap-1 text-[9px] font-semibold text-[#05C770] sm:text-[10px]">
               <svg className="h-3 w-3" viewBox="0 0 24 24" fill="none">
                 <path
                   d="M5 15l6-6 4 4 5-6"
@@ -110,7 +110,7 @@ export default function CorporatePanel({ active }: { active: boolean }) {
             </span>
           </div>
 
-          <div className="mt-2 flex min-h-0 flex-1 items-end gap-[6px]">
+          <div className="mt-1 flex min-h-0 flex-1 items-end gap-1 sm:gap-[6px]">
             {BARS.map((height, i) => (
               <motion.div
                 key={i}
@@ -136,12 +136,12 @@ export default function CorporatePanel({ active }: { active: boolean }) {
         </div>
 
         {/* Partner marquee */}
-        <div className="shrink-0 overflow-hidden rounded-lg border border-white/8 bg-black/30 py-2">
+        <div className="shrink-0 overflow-hidden rounded-lg border border-white/8 bg-black/30 py-1.5 sm:py-2">
           <div className="marquee-track">
             {[...PARTNERS, ...PARTNERS].map((partner, i) => (
               <span
                 key={i}
-                className="mr-2 shrink-0 rounded-full border border-white/10 px-3 py-1 text-[10px] text-white/45"
+                className="mr-2 shrink-0 rounded-full border border-white/10 px-2.5 py-0.5 text-[8.5px] text-white/45 sm:px-3 sm:py-1 sm:text-[9.5px]"
                 style={{ fontFamily: MONO }}
               >
                 {partner}

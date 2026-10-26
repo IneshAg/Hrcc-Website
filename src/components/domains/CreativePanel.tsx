@@ -170,11 +170,11 @@ export default function CreativePanel({ active }: { active: boolean }) {
       </div>
 
       {/* Swatch bar */}
-      <div className="flex shrink-0 items-center gap-2 border-t border-white/8 bg-black/50 px-4 py-2.5">
+      <div className="flex shrink-0 items-center gap-2 border-t border-white/8 bg-black/50 px-3 py-2 sm:px-4 sm:py-2">
         {SWATCHES.map((color, i) => (
           <motion.span
             key={color}
-            className="h-4 w-4 rounded-full ring-1 ring-white/15"
+            className="h-3.5 w-3.5 sm:h-4 sm:w-4 rounded-full ring-1 ring-white/15"
             style={{ background: color }}
             animate={active ? { scale: [1, 1.35, 1] } : undefined}
             transition={{
