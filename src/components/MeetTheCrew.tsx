@@ -6,7 +6,6 @@ import Image, { StaticImageData } from "next/image";
 import Arnav from "@/assets/Arnav.png";
 import Purva from "@/assets/Purva.png";
 import Ranvir from "@/assets/Ranvir.png";
-import Shlok from "@/assets/Shlok.jpeg";
 import Nikhil from "@/assets/Nikhil.jpeg";
 import Naisha from "@/assets/Naisha.jpeg";
 import Jushiya from "@/assets/Jushiya.jpeg";
@@ -14,6 +13,7 @@ import Agambir from "@/assets/Agambir.png";
 import Shruti from "@/assets/Shruti.jpg";
 import Gowtham from "@/assets/Gowtham.jpeg";
 import Shourya from "@/assets/Shourya.png";
+import Srinchitta from "@/assets/Srinchitta.jpg";
 import Adarsh from "@/assets/Adarsh.jpeg";
 import Abhay from "@/assets/Abhay.jpg";
 import Inesh from "@/assets/Inesh.png";
@@ -71,11 +71,11 @@ const vicePresidents: CrewMember[] = [
     linkedin: "https://www.linkedin.com/in/itsayush18/",
   },
   {
-    name: "Shlok Agarwal",
+    name: "Agambir Singh",
     role: "Vice President",
-    image: Shlok,
-    github: "https://github.com/Aryan27-max",
-    linkedin: "https://www.linkedin.com/in/aryan-gupta-1058aa209/",
+    image: Agambir,
+    github: "https://github.com/SinghAgambir05/SinghAgambir05",
+    linkedin: "https://in.linkedin.com/in/agambir-singh-jammu-4204212b9",
   },
   {
     name: "Naisha Sharma",
@@ -174,24 +174,17 @@ const domainLeads: DomainGroup[] = [
         linkedin: "https://www.linkedin.com/in/im-shourya/",
       },
       {
-        name: "Tanishq Verma",
+        name: "Srinchitta Mohapatra",
         role: "Creative Lead",
-        image: undefined,
+        image: Srinchitta,
         github: TBD,
-        linkedin: TBD,
+        linkedin: "https://www.linkedin.com/in/srinchitta-mohapatra-674346393/",
       },
     ],
   },
   {
     domain: "Corporate",
     members: [
-      {
-        name: "Agambir Singh",
-        role: "Corporate Lead",
-        image: Agambir,
-        github: "https://github.com/SinghAgambir05/SinghAgambir05",
-        linkedin: "https://in.linkedin.com/in/agambir-singh-jammu-4204212b9",
-      },
       {
         name: "Adarsh Singh",
         role: "Corporate Lead",
