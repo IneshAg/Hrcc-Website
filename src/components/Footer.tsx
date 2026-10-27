@@ -41,7 +41,14 @@ const Footer = () => {
               <Link href="#domains" className="block text-lg hover:text-green-500 transition-colors duration-200">Domains</Link>
               <Link href="#team" className="block text-lg hover:text-green-500 transition-colors duration-200">Team</Link>
               <Link href="#events" className="block text-lg hover:text-green-500 transition-colors duration-200">Events</Link>
-              <Link href="mailto:hrccsrm@gmail.com" className="block text-lg hover:text-green-500 transition-colors duration-200">Contact Us</Link>
+              <a
+                href="https://mail.google.com/mail/?view=cm&fs=1&to=hrccsrm@gmail.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block text-lg hover:text-green-500 transition-colors duration-200"
+              >
+                Contact Us
+              </a>
             </div>
           </div>
 
@@ -51,13 +58,22 @@ const Footer = () => {
             
             {/* Email */}
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 bg-green-500/20 rounded-full flex items-center justify-center">
-                <svg className="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/>
-                  <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/>
-                </svg>
-              </div>
-              <a href="mailto:hrccsrm@gmail.com" className="hover:text-green-400 transition-colors duration-200">hrccsrm@gmail.com</a>
+              <a
+                href="https://mail.google.com/mail/?view=cm&fs=1&to=hrccsrm@gmail.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-center gap-3"
+              >
+                <div className="w-10 h-10 bg-green-500/20 rounded-full flex items-center justify-center group-hover:bg-green-500/30 transition-colors duration-200">
+                  <svg className="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/>
+                    <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/>
+                  </svg>
+                </div>
+                <span className="hover:text-green-400 text-gray-300 transition-colors duration-200">
+                  hrccsrm@gmail.com
+                </span>
+              </a>
             </div>
 
             {/* Social Icons */}
