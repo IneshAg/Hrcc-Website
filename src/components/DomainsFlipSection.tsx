@@ -11,7 +11,7 @@ import TechnicalPanel from "@/components/domains/TechnicalPanel";
 import CreativePanel from "@/components/domains/CreativePanel";
 import CorporatePanel from "@/components/domains/CorporatePanel";
 import heroImage from "@/assets/domains-hero.jpg";
-import { RECRUITMENT_FORM_URL } from "@/lib/links";
+import { RECRUITMENT_FORM_URL, RECRUITMENT_OPEN } from "@/lib/links";
 
 // ─── Domain card data ────────────────────────────────────────────────────────
 // All three cards share ONE image (heroImage, below) — each card shows a third
@@ -152,15 +152,17 @@ function FlipCard({
                 {card.renderPanel(true)}
               </div>
 
-              <a
-                href={RECRUITMENT_FORM_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={(e) => e.stopPropagation()}
-                className="flex shrink-0 items-center justify-center gap-2 rounded-full border border-[#05C770]/60 bg-black/40 py-1.5 text-[10px] font-bold text-[#05C770] transition-colors hover:bg-[#05C770] hover:text-black sm:py-2 sm:text-[11px]"
-              >
-                APPLY NOW
-              </a>
+              {RECRUITMENT_OPEN && (
+                <a
+                  href={RECRUITMENT_FORM_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={(e) => e.stopPropagation()}
+                  className="flex shrink-0 items-center justify-center gap-2 rounded-full border border-[#05C770]/60 bg-black/40 py-1.5 text-[10px] font-bold text-[#05C770] transition-colors hover:bg-[#05C770] hover:text-black sm:py-2 sm:text-[11px]"
+                >
+                  APPLY NOW
+                </a>
+              )}
             </div>
           </div>
         </div>
@@ -206,7 +208,7 @@ export default function DomainsFlipSection() {
   const outerOpacity = useTransform(progress, [0.3, 0.5], [0, 1]);
 
   return (
-    <section className="relative w-full bg-black" id="domains-flip">
+    <section className="relative w-full bg-black" id="domains">
       {/* ── Scroll track — tall so the pin has room ── */}
       <div ref={trackRef} className="relative h-[500vh]">
         {/* ── Sticky viewport ── */}

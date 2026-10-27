@@ -220,19 +220,23 @@ function DomainCard({
               ))}
             </div>
             <div
-              className="mb-3 shrink-0 overflow-hidden rounded-xl border border-white/8 bg-black/40 sm:mb-4"
-              style={{ height: dims.panelH }}
+              className={`overflow-hidden rounded-xl border border-white/8 bg-black/40 ${
+                RECRUITMENT_OPEN ? "mb-3 shrink-0 sm:mb-4" : "flex-1 min-h-0"
+              }`}
+              style={RECRUITMENT_OPEN ? { height: dims.panelH } : undefined}
             >
               {d.renderPanel(true)}
             </div>
-            <a
-              href={RECRUITMENT_FORM_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 rounded-full border border-[#05C770]/60 bg-black/40 py-2 text-[11px] font-bold text-[#05C770] transition-colors hover:bg-[#05C770] hover:text-black sm:py-2.5 sm:text-xs"
-            >
-              APPLY NOW
-            </a>
+            {RECRUITMENT_OPEN && (
+              <a
+                href={RECRUITMENT_FORM_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-2 rounded-full border border-[#05C770]/60 bg-black/40 py-2 text-[11px] font-bold text-[#05C770] transition-colors hover:bg-[#05C770] hover:text-black sm:py-2.5 sm:text-xs"
+              >
+                APPLY NOW
+              </a>
+            )}
           </motion.div>
         )}
       </div>
