@@ -83,7 +83,7 @@ export default function Navbar() {
               const destination = isHome || link.href.startsWith("/") ? link.href : `/${link.href}`;
               const isRoute = destination.startsWith("/");
               const id = link.href.startsWith("/") ? link.href : link.href.replace("#", "");
-              const isActive = link.href.startsWith("/") ? false : active === id;
+              const isActive = isHome ? (!link.href.startsWith("/") && active === id) : pathname === link.href;
               const isHovered = hovered === id;
 
               let bg = "transparent";
@@ -216,7 +216,7 @@ export default function Navbar() {
                 const destination = isHome || link.href.startsWith("/") ? link.href : `/${link.href}`;
                 const isRoute = destination.startsWith("/");
                 const id = link.href.startsWith("/") ? link.href : link.href.replace("#", "");
-                const isActive = link.href.startsWith("/") ? false : active === id;
+                const isActive = isHome ? (!link.href.startsWith("/") && active === id) : pathname === link.href;
 
                 const itemStyle = {
                   background: isActive ? "rgba(255,255,255,0.15)" : "transparent",
