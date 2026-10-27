@@ -18,7 +18,7 @@ const Footer = () => {
         </div>
 
         {/* Logo and Navigation Section */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 mb-16">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
           
           {/* Left: Logo and Name */}
           <div className="lg:col-span-1">
@@ -83,18 +83,6 @@ const Footer = () => {
                 </svg>
               </a>
             </div>
-          </div>
-        </div>
-
-        {/* Bottom Section: Credit & Copyright */}
-        <div className="border-t border-gray-600 pt-8">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-gray-400 text-sm">
-              Made with <span className="text-green-500">💚</span> by HackerRank Campus Crew
-            </p>
-            <p className="text-gray-400 text-sm">
-              © 2026 HackerRank Campus Crew. All rights reserved.
-            </p>
           </div>
         </div>
       </div>
