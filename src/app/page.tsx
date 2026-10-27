@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { AnimatePresence } from "framer-motion";
 import Preloader from "@/components/Preloader";
 import Squares from "@/components/Squares";
@@ -15,14 +15,40 @@ import OurWork from "@/components/OurWork";
 import Footer from "@/components/Footer";
 import RecruitmentBadge from "@/components/RecruitmentBadge";
 
+// Persists across client-side page transitions (e.g. /gallery -> /)
+let hasShownPreloader = false;
+
 export default function Home() {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(() => {
+    if (typeof window !== "undefined") {
+      if (hasShownPreloader || sessionStorage.getItem("hrcc_preloader_shown") === "true") {
+        hasShownPreloader = true;
+        return false;
+      }
+    }
+    return !hasShownPreloader;
+  });
+
+  useEffect(() => {
+    if (sessionStorage.getItem("hrcc_preloader_shown") === "true") {
+      hasShownPreloader = true;
+      setIsLoading(false);
+    }
+  }, []);
+
+  const handlePreloaderComplete = () => {
+    hasShownPreloader = true;
+    try {
+      sessionStorage.setItem("hrcc_preloader_shown", "true");
+    } catch {}
+    setIsLoading(false);
+  };
 
   return (
     <main className="relative min-h-screen text-white">
       <AnimatePresence mode="wait">
         {isLoading && (
-          <Preloader key="preloader" onComplete={() => setIsLoading(false)} />
+          <Preloader key="preloader" onComplete={handlePreloaderComplete} />
         )}
       </AnimatePresence>
 
