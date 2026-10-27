@@ -7,7 +7,7 @@ import Squares from "@/components/Squares";
 import SmoothScroll from "@/components/SmoothScroll";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
-import DomainsFlipSection from "@/components/DomainsFlipSection";
+import DomainsSection from "@/components/DomainsSection";
 import CentreOfExcellence from "@/components/CentreOfExcellence";
 import MeetTheCrew from "@/components/MeetTheCrew";
 import UpcomingEvents from "@/components/UpcomingEvents";
@@ -49,7 +49,7 @@ export default function Home() {
           <HeroSection />
 
           {/* Domains Section */}
-          <DomainsFlipSection />
+          <DomainsSection />
 
           {/* Centre of Excellence */}
           <CentreOfExcellence />

@@ -208,7 +208,7 @@ export default function DomainsFlipSection() {
   const outerOpacity = useTransform(progress, [0.3, 0.5], [0, 1]);
 
   return (
-    <section className="relative w-full bg-black" id="domains">
+    <section className="relative w-full bg-black" id="domains-flip">
       {/* ── Scroll track — tall so the pin has room ── */}
       <div ref={trackRef} className="relative h-[500vh]">
         {/* ── Sticky viewport ── */}
